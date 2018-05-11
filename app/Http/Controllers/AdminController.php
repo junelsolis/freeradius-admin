@@ -33,7 +33,7 @@ class AdminController extends Controller
       }
 
       // check password against database
-      if ($password !== $admin->password) {
+      if ($password != $admin->password) {
         return back()->with('error', 'Invalid credentials.');
       }
 
@@ -41,6 +41,7 @@ class AdminController extends Controller
       // then redirect to main admin view
       session(['loggedIn' => true]);
       session(['username' => $admin->username]);
+      session(['id' => $admin->id]);
 
       return redirect('/admin');
 
@@ -53,12 +54,68 @@ class AdminController extends Controller
         return redirect('/');
       }
     }
-    public function logout() {}
+    public function logout() {
+      $check = checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      // clear session database
+      session()->flush();
+
+      // redirect to login page
+      return redirect('/');
+    }
 
     public function showChangePassword() {
+      $check = checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
 
+      return view('changePassword');
     }
-    public function changePassword(Request $request) {}
+    public function changePassword(Request $request) {
+      $request->validate([
+        'password' => 'string|required',
+        'newPassword' => 'string|required',
+        'confirmNewPassword' => 'string|required'
+      ]);
+
+      // assign variables
+      $password = sha1($request['password']);
+      $newPassword = sha1($request['newPassword']);
+      $confirmNewPassword = sha1($request['confirmNewPassword']);
+
+      // retrieve user from DB
+      $id = session('id');
+      $admin = DB::table('admins')->where('id', $id)->first();
+
+      // if not found, flush session and redirect to main page
+      if (empty($admin)) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      // compare password with DB
+      if ($password != $admin->password) {
+        return back()->with('error', 'Wrong password.');
+      }
+
+      // compare the new passwords
+      if ($newPassword != $confirmNewPassword) {
+        return back()->with('error', 'New passwords must match. Try again.');
+      }
+
+      // insert new password into DB
+      DB::table('admins')
+        ->where('id', $id)
+        ->update(['password' => $newPassword]);
+
+      return redirect('/admin')->with('msg', 'Your password has been changed.');
+    }
 
     public function showUserAdd() {}
     public function userAdd() {}
@@ -71,8 +128,9 @@ class AdminController extends Controller
     private function checkLoggedIn() {
       $loggedIn = session('loggedIn');
       $username = session('username');
+      $id = session('id');
 
-      if (empty($loggedIn) || empty($username)) {
+      if (empty($loggedIn) || empty($username) || empty($id)) {
         return false;
       }
       else {
