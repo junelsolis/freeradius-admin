@@ -117,8 +117,92 @@ class AdminController extends Controller
       return redirect('/admin')->with('msg', 'Your password has been changed.');
     }
 
-    public function showUserAdd() {}
-    public function userAdd() {}
+    public function showUserAdd() {
+      $check = checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      return view('userAdd');
+    }
+    public function userAdd(Request $request) {
+      $check = checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      // validate request
+      $request->validate([
+        'firstname' => 'string|required',
+        'lastname' => 'string|required',
+        'username' => 'string|required',
+        'password' => 'string|required',
+        'confirmPassword' => 'string|required',
+        'group' => 'string|required',
+        'logins' => 'int|required',
+      ]);
+
+      // assign variables
+      $firstname = ucfirst($request['firstname']);
+      $lastname = ucfirst($request['lastname']);
+      $username = $request['username'];
+      $password = $request['password'];
+      $confirmPassword = $request['confirmPassword'];
+      $group = lcwords($request['group']);
+      $logins = $request['logins'];
+
+      // check that this username does not already exist
+      $exists = DB::table('users')->where('username', $username)->first();
+      if (!empty($exists)) {
+        return back()->with('error', 'User already exists. Please choose another username.');
+      }
+
+      // make sure passwords are the same
+      if ($password != $confirmPassword) {
+        return back()->with('error', 'Passwords must be the same.');
+      }
+
+      // make sure minimum of 8 character password
+      if (strlen($password) < 8) {
+        return back()->with('error', 'Password must have a minimum of 8 characters.');
+      }
+
+      // encode password
+      $password = sha1($password);
+
+      // if all checks passed, insert new user into database
+      DB::table('users')->insert([
+        'username' => $username,
+        'firstname' => $firstname,
+        'lastname' => $lastname,
+        'password' => $password
+      ]);
+
+      // insert group data
+      DB::table('radusergroup')->insert([
+        'username' => $username,
+        'groupname' => $group,
+      ]);
+
+      // insert radcheck data
+      DB::table('radcheck')->insert([
+        'username' => $username,
+        'attribute' => 'SHA-Password',
+        'op' => ':=',
+        'value' => $password
+      ]);
+
+      DB::table('radcheck')->insert([
+        'username' => $username,
+        'attribute' => 'Simultaneous-Use',
+        'op' => ':=',
+        'value' => $logins
+      ]);
+
+      return redirect('/admin')->with('msg', 'User added to database.');
+    }
 
     public function showUserModify() {}
     public function userModify() {}
