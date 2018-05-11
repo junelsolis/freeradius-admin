@@ -14,3 +14,5 @@
 Route::get('/', 'AdminController@main');
 Route::post('/', 'AdminController@login');
 Route::get('/admin', 'AdminController@showDashboard');
+
+Route::post('/admin/add-user', 'AdminController@userAdd');

@@ -1,0 +1,11 @@
+body {
+  background-color: rgb(240,240,240);
+  color: rgb(80,80,80);
+}
+body > .grid {
+  height: 100%;
+}
+
+#new-user-form {
+  text-align: left;
+}
