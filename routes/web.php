@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AdminController@main');
+Route::post('/', 'AdminController@login');
+Route::get('/admin', 'AdminController@showDashboard');
