@@ -19,6 +19,7 @@ Homestead.json
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
 
+mysql/srv/data/
 mysql/srv/data/binlog\.000009
 
 mysql/srv/data/binlog\.000010
