@@ -1,9 +1,13 @@
 body {
-  background-color: rgb(240,240,240);
-  color: rgb(80,80,80);
+  background-color: rgb(245,245,245);
+  color: rgb(100,100,100);
 }
 body > .grid {
-  height: 100%;
+  /* min-height: 100%; */
+}
+
+label {
+  color: rgb(100,100,100) !important;
 }
 
 #new-user-form {

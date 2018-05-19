@@ -12,52 +12,52 @@
   </script>
   <title>FreeRADIUS-MySQL Admin</title>
 </head>
-<body>
-  <div class="ui middle aligned center aligned container grid">
-      <div class='row'>
-        <div class="six wide computer seven wide tablet fourteen wide mobile column">
-          <div class='ui segment'>
-            stats go in here
+<body class="ui container">
+  <div class='ui grid'>
+    <div class='ui two column centered grid'>
+      <div class='four column row'>
+        test
+      </div>
+      <div class="six wide computer seven wide tablet fourteen wide mobile column">
+        Stats go in here
+      </div>
+      <div class="six wide computer seven wide tablet fourteen wide mobile column">
+        <h3>Add New User</h3>
+        <form id='new-user-form' class="ui form" method="post" action="/admin/add-user">
+          {{ csrf_field() }}
+          <div class='field'>
+            <label class="left aligned">Username</label>
+            <input type="text" name='username' required placeholder="Enter username" />
           </div>
-        </div>
-        <div class="six wide computer seven wide tablet fourteen wide mobile column">
-          <div class="ui segment">
-            <h3>Add New User</h3>
-            <form id='new-user-form' class="ui form" method="post" action="/admin/add-user">
-              {{ csrf_field() }}
-              <div class='field'>
-                <label class="left aligned">Username</label>
-                <input type="text" name='username' required placeholder="Enter username" />
-              </div>
-              <div class='field'>
-                <label>Name</label>
-                <div class="ui two fields">
-                  <div class="field">
-                    <input type="text" name="firstname" required placeholder="First Name" />
-                  </div>
-                  <div class="field">
-                    <input type="text" name="lastname" required placeholder="Last Name" />
-                  </div>
-                </div>
+          <div class='field'>
+            <label>Name</label>
+            <div class="ui two fields">
+              <div class="field">
+                <input type="text" name="firstname" required placeholder="First Name" />
               </div>
               <div class="field">
-                <label>Password</label>
-                <div class="ui two fields">
-                  <div class="field">
-                    <input type="password" name="password" required placeholder="Password" />
-                  </div>
-                  <div class="field">
-                    <input type="password" name="confirmPassword" required placeholder="Confirm password" />
-                  </div>
-                </div>
+                <input type="text" name="lastname" required placeholder="Last Name" />
               </div>
-              <button class="ui blue button">Add User</button>
-            </form>
+            </div>
           </div>
-
-        </div>
+          <div class="field">
+            <label>Password</label>
+            <div class="ui two fields">
+              <div class="field">
+                <input type="password" name="password" required placeholder="Password" />
+              </div>
+              <div class="field">
+                <input type="password" name="confirmPassword" required placeholder="Confirm password" />
+              </div>
+            </div>
+          </div>
+          <button class="ui blue button">Add User</button>
+        </form>
       </div>
+
+    </div>
   </div>
+
 
   </div>
 </body>
