@@ -7,7 +7,7 @@ Written in PHP7 using the Laravel framework for an installation of FreeRADIUS 3 
 The simplest way to install this app is using Docker.
 
 1. Clone this repository
-2. Use the docker-compose.yml file to build and run the containers.
+2. Use the **docker-compose.yml** file to build and run the containers.
 
 The docker-compose file will create three services: **rad-server**, **mysql-server**, and **apache2-server**. The three containers have network connectivity with each other through static ip's on their own bridge network. Ports are forwarded or exposed as needed.
 
