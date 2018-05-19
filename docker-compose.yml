@@ -50,6 +50,9 @@ services:
    - "8080:80"
   environment:
     PMA-HOST: mysql-server
+  networks:
+    radnet:
+      ipv4_address: 172.100.0.103
 
 networks:
  radnet:
