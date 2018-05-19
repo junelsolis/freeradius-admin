@@ -49,7 +49,9 @@ services:
   ports:
    - "8080:80"
   environment:
-    PMA-HOST: mysql-server
+    PMA_HOST: 172.100.0.101
+    PMA_USER: root
+    PMA_PASSWORD: password
   networks:
     radnet:
       ipv4_address: 172.100.0.103

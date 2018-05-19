@@ -6,4 +6,3 @@ default_character_set = utf8
 [mysqld]
 character_set_server = utf8
 collation_server = utf8_general_ci
-
