@@ -18,11 +18,11 @@ services:
  mysql:
   container_name: mysql-server
   build: ./mysql
-  expose:
-   - "3306"
+  ports:
+   - "3306:3306"
   volumes:
    - ./mysql/srv/conf.d:/etc/mysql/conf.d
-   - ./mysql/srv/initdb.d:/docker-entrypont-initdb.d
+   - ./mysql/srv/initdb.d:/docker-entrypoint-initdb.d
    - ./mysql/srv/data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: password
