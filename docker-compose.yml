@@ -1,0 +1,51 @@
+version: "3.2"
+
+services:
+
+ radius:
+  container_name: rad-server
+  build: ./freeradius
+  ports:
+   - "1812:1812"
+   - "1813:1813"
+  volumes:
+   - "./freeradius/src:/etc/raddb"
+  networks:
+   radnet:
+    ipv4_address: 172.100.0.100
+  tty: true
+
+ mysql:
+  container_name: mysql-server
+  build: ./mysql
+  expose:
+   - "3306"
+  volumes:
+   - ./mysql/srv/conf.d:/etc/mysql/conf.d
+   - ./mysql/srv/initdb.d:/docker-entrypont-initdb.d
+   - ./mysql/srv/data:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: password
+  networks:
+   radnet:
+    ipv4_address: 172.100.0.101
+
+ apache:
+  container_name: apache2-server
+  build: ./web
+  ports:
+   - "80:80/tcp"
+   - "443:443"
+  volumes:
+   - "./web/src:/var/www/html"
+  networks:
+   radnet:
+    ipv4_address: 172.100.0.102
+  tty: true
+
+networks:
+ radnet:
+  driver: bridge
+  ipam:
+   config:
+   - subnet: 172.100.0.0/24

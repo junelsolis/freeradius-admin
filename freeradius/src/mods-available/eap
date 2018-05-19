@@ -1,0 +1,43 @@
+#
+eap {
+	default_eap_type = ttls
+	timer_expire     = 60
+	ignore_unknown_eap_types = no
+	cisco_accounting_username_bug = no
+	max_sessions = ${max_requests}
+
+	gtc {
+		auth_type = PAP
+	}
+	tls-config tls-common {
+		private_key_file = ${certdir}/privkey.pem
+		certificate_file = ${certdir}/fullchain.pem
+		ca_file = ${certdir}/fullchain.pem
+		#dh_file = ${certdir}/dh
+		#ca_path = ${cadir}
+		cipher_list = "DEFAULT"
+		ecdh_curve = "prime256v1"
+		cache {
+			enable = yes
+			lifetime = 24 # hours
+			max_entries = 255
+		}
+		verify {
+		}
+		ocsp {
+			enable = no
+			override_cert_url = yes
+			url = "http://127.0.0.1/ocsp/"
+		}
+	}
+	tls {
+		tls = tls-common
+	}
+	ttls {
+		tls = tls-common
+		default_eap_type = gtc
+		copy_request_to_tunnel = yes
+		use_tunneled_reply = yes
+		virtual_server = "inner-tunnel"
+	}
+}

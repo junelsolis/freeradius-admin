@@ -1,0 +1,75 @@
+server server01 {
+listen {
+	ipaddr = *
+	type = auth
+	port = 0
+	limit {
+	      max_connections = 16
+	      lifetime = 0
+	      idle_timeout = 30
+	}
+}
+listen {
+	ipaddr = *
+	port = 0
+	type = acct
+
+	limit {
+	}
+}
+
+authorize {
+	filter_username
+	preprocess
+	sql
+	#if (SQL-Group != "" && SQL-Group != "") {
+	#	reject
+	#}
+	expiration
+	logintime
+	pap
+}
+
+
+authenticate {
+	Auth-Type PAP {
+		pap
+	}
+}
+
+preacct {
+	preprocess
+	acct_unique
+	suffix
+}
+
+accounting {
+	#detail
+	unix
+	sql
+	exec
+	attr_filter.accounting_response
+}
+
+session {
+	sql
+}
+post-auth {
+
+	update {
+		&reply: += &session-state:
+	}
+
+	exec
+
+	Post-Auth-Type REJECT {
+		attr_filter.access_reject
+	}
+}
+
+pre-proxy {
+}
+post-proxy {
+	eap
+}
+}
