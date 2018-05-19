@@ -18,8 +18,8 @@ services:
  mysql:
   container_name: mysql-server
   build: ./mysql
-  ports:
-   - "3306:3306"
+  expose:
+   - "3306"
   volumes:
    - ./mysql/srv/conf.d:/etc/mysql/conf.d
    - ./mysql/srv/initdb.d:/docker-entrypoint-initdb.d
@@ -42,6 +42,14 @@ services:
    radnet:
     ipv4_address: 172.100.0.102
   tty: true
+
+ phpmyadmin:
+  container_name: phpmyadmin
+  build: ./phpmyadmin
+  ports:
+   - "8080:80"
+  environment:
+    PMA-HOST: mysql-server
 
 networks:
  radnet:
