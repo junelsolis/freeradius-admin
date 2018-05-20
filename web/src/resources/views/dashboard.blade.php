@@ -32,7 +32,23 @@
       <div class="uk-grid uk-margin-left uk-margin-right">
         <div class="uk-width-1-3@s uk-margin-top">
           <h5 class="uk-heading-line"><span><strong>Add User</strong></span></h5>
-          <form class='uk-form-horizontal' method="post" action="admin/add-user">
+
+
+          @if (session('error'))
+          <div class="uk-alert-warning" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p>{{ session('error') }}</p>
+          </div>
+          @endif
+          @if (session('info'))
+          <div class='uk-alert-success' uk-alert>
+            <a class='uk-alert-close' uk-close></a>
+            <p>{{ session('info') }}</p>
+          </div>
+          @endif
+
+
+          <form method="post" action="admin/add-user">
             {{ csrf_field() }}
               <div class='uk-width-small uk-margin'>
                 <input class='uk-input' type='text' placeholder='Username' name='username' required />
@@ -45,7 +61,17 @@
                 <input class='uk-input uk-width-small@s' type='password' placeholder='Password' name='password' required />
                 <input class='uk-input uk-width-small@s' type='password' placeholder='Confirm Password' name='confirmPassword' required />
               </fieldset>
+              <fieldset class='uk-fieldset uk-margin '>
+                <!-- <label class='uk-form-label'>Group</label> -->
+                <select class='uk-select uk-width-small@s' name='group'>
+                  <option>Select Group</option>
+                  @foreach ($groups as $group)
+                  <option value="{{ $group->id }}">{{ $group->name }}</option>
+                  @endforeach
+                </select>
+                <input type='number' class='uk-input uk-width-small@s' name='logins' placeholder='Allowed Logins' required />
 
+              </fieldset>
             <div class="uk-margin">
               <button class="uk-button uk-button-primary" type="submit"><span uk-icon="icon: user"></span> Add User</button>
             </div>

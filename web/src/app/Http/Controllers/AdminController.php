@@ -7,45 +7,6 @@ use DB;
 
 class AdminController extends Controller
 {
-    public function main() {
-      return view('main');
-    }
-    public function login(Request $request) {
-      // validate request
-      $request->validate([
-        'username' => 'required|string',
-        'password' => 'required|string'
-      ]);
-
-      // assign variables
-      $username = $request['username'];
-      $password = $request['password'];
-
-      // encode password in sha1
-      $password = sha1($password);
-
-      // attempt to find admin user in DB
-      $admin = DB::table('admins')->where('username', $username)->first();
-
-      // return with error if user not found
-      if (empty($admin)) {
-        return back()->with('error', 'Invalid credentials.');
-      }
-
-      // check password against database
-      if ($password != $admin->password) {
-        return back()->with('error', 'Invalid credentials.');
-      }
-
-      // if password is correct, store some session variables
-      // then redirect to main admin view
-      session(['loggedIn' => true]);
-      session(['username' => $admin->username]);
-      session(['id' => $admin->id]);
-
-      return redirect('/admin');
-
-    }
 
     public function showDashboard() {
       $check = $this->checkLoggedIn();
@@ -54,7 +15,11 @@ class AdminController extends Controller
         return redirect('/');
       }
 
-      return view('dashboard');
+      // fetch from db
+      $groups = DB::table('groups')->orderBy('name')->get();
+
+      return view('dashboard')
+        ->with('groups', $groups);
 
     }
     public function logout() {
@@ -71,15 +36,6 @@ class AdminController extends Controller
       return redirect('/');
     }
 
-    public function showChangePassword() {
-      $check = checkLoggedIn();
-      if ($check == false) {
-        session()->flush();
-        return redirect('/');
-      }
-
-      return view('changePassword');
-    }
     public function changePassword(Request $request) {
       $request->validate([
         'password' => 'string|required',
@@ -121,7 +77,7 @@ class AdminController extends Controller
     }
 
     public function userAdd(Request $request) {
-      $check = checkLoggedIn();
+      $check = $this->checkLoggedIn();
       if ($check == false) {
         session()->flush();
         return redirect('/');
@@ -134,7 +90,7 @@ class AdminController extends Controller
         'username' => 'string|required',
         'password' => 'string|required',
         'confirmPassword' => 'string|required',
-        'group' => 'string|required',
+        'group' => 'int|required',
         'logins' => 'int|required',
       ]);
 
@@ -144,23 +100,26 @@ class AdminController extends Controller
       $username = $request['username'];
       $password = $request['password'];
       $confirmPassword = $request['confirmPassword'];
-      $group = lcwords($request['group']);
+      $group = $request['group'];
       $logins = $request['logins'];
+
 
       // check that this username does not already exist
       $exists = DB::table('users')->where('username', $username)->first();
       if (!empty($exists)) {
-        return back()->with('error', 'User already exists. Please choose another username.');
+        return back()->with('error', 'Username already exists. Please choose another username.');
       }
 
-      // make sure passwords are the same
-      if ($password != $confirmPassword) {
-        return back()->with('error', 'Passwords must be the same.');
+      // check first and lastnames do not exist
+      $namesExist = DB::table('users')->where('firstname', $firstname)->where('lastname', $lastname)->first();
+      if (!empty($namesExist)) {
+        return back()->with('error', 'User already exists. Please modify the user instead.');
       }
 
-      // make sure minimum of 8 character password
-      if (strlen($password) < 8) {
-        return back()->with('error', 'Password must have a minimum of 8 characters.');
+      // run password checks
+      $checkPassword = $this->checkPassword($password, $confirmPassword, $firstname, $lastname);
+      if ($checkPassword !== TRUE) {
+        return back()->with('error', $checkPassword);
       }
 
       // encode password
@@ -171,13 +130,13 @@ class AdminController extends Controller
         'username' => $username,
         'firstname' => $firstname,
         'lastname' => $lastname,
-        'password' => $password
       ]);
 
       // insert group data
+      $groupName = DB::table('groups')->where('id', $group)->pluck('name')->first();
       DB::table('radusergroup')->insert([
         'username' => $username,
-        'groupname' => $group,
+        'groupname' => $groupName,
       ]);
 
       // insert radcheck data
@@ -195,7 +154,7 @@ class AdminController extends Controller
         'value' => $logins
       ]);
 
-      return redirect('/admin')->with('msg', 'User added to database.');
+      return redirect('/admin')->with('info', 'User added to database.');
     }
 
     public function showUserModify() {}
@@ -203,6 +162,11 @@ class AdminController extends Controller
 
     public function userDelete(Request $request) {}
 
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
+    // PRIVATE FUNCTIONS
+    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////
     private function checkLoggedIn() {
       $loggedIn = session('loggedIn');
       $username = session('username');
@@ -214,6 +178,35 @@ class AdminController extends Controller
       else {
         return true;
       }
+    }
+    private function checkPassword($password, $confirmPassword, $fname, $lname) {
+
+      // convert names to lowercase strings
+      $fname = strtolower($fname);
+      $lname = strtolower($lname);
+
+      // make sure passwords are the same
+      if ($password != $confirmPassword) {
+        return 'Passwords do not match.';
+      }
+
+      // make sure minimum of 10 character password
+      if (strlen($password) < 10) {
+        return 'Password must have a minimum of 10 characters.';
+      }
+
+      // no firstname in password
+      if (stripos($password, $fname) !== false) {
+        return 'First and last names cannot be included in the password.';
+      }
+
+      // no lastname in password
+      if (stripos($password, $lname) !== false) {
+        return 'First and last names cannot be included in the password.';
+      }
+
+      return true;
+
     }
 
 }
