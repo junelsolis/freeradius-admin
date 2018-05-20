@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 172.100.0.101
--- Generation Time: May 20, 2018 at 11:29 AM
+-- Generation Time: May 20, 2018 at 11:59 AM
 -- Server version: 5.7.22
 -- PHP Version: 7.2.4
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `radius`
 --
+CREATE DATABASE IF NOT EXISTS `radius` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `radius`;
 
 -- --------------------------------------------------------
 
@@ -42,6 +44,18 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `username`, `firstname`, `lastname`, `password`) VALUES
 (1, 'testadmin', 'Test', 'User', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups`
+--
+
+CREATE TABLE `groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `description` varchar(80) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -223,6 +237,12 @@ ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `nas`
 --
 ALTER TABLE `nas`
@@ -299,6 +319,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nas`
