@@ -17,7 +17,7 @@ The docker-compose file is set to port-forward 3306 in case you need direct netw
 
 For a production setup, modify the **.env** file located in *./web/src* and make sure **you change the app key**. You can do so by going to a terminal, navigating to the *./web/src* directory, and running ```php artisan key:generate```.
 
-# FreeRADIUS 3 Setup
+# Manual Installation
 In order to use this software, I assume that you already have a FreeRADIUS 3 server set up properly to interface with a MySQL database containing the default FreeRADIUS schema. This project was constructed with the default MySQL schema that comes with FreeRADIUS in mind. If you wish to use this project with a different schema, you will have to change the tables the source code points to.
 
 # How to Contribute
