@@ -1,15 +1,10 @@
-body {
-  background-color: rgb(245,245,245);
-  color: rgb(100,100,100);
+#header h3 {
+  color: rgb(80,80,80);
 }
-body > .grid {
-  /* min-height: 100%; */
-}
-
-label {
-  color: rgb(100,100,100) !important;
+#header em {
+  color: rgb(80,80,80);
 }
 
-#new-user-form {
-  text-align: left;
+#content strong {
+  color: rgb(32,142,241);
 }

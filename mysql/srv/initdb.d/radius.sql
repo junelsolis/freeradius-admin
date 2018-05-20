@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 172.100.0.101
--- Generation Time: May 20, 2018 at 05:26 AM
+-- Generation Time: May 20, 2018 at 11:29 AM
 -- Server version: 5.7.22
 -- PHP Version: 7.2.4
 
@@ -21,8 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `radius`
 --
-CREATE DATABASE radius;
-USE radius;
+
 -- --------------------------------------------------------
 
 --
@@ -30,18 +29,19 @@ USE radius;
 --
 
 CREATE TABLE `admins` (
-  `username` varchar(40) NOT NULL,
+  `id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`username`, `firstname`, `lastname`, `password`) VALUES
-('admin', 'Test', 'Admin', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
+INSERT INTO `admins` (`id`, `username`, `firstname`, `lastname`, `password`) VALUES
+(1, 'testadmin', 'Test', 'User', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
 
 -- --------------------------------------------------------
 
@@ -220,8 +220,7 @@ INSERT INTO `users` (`username`, `firstname`, `lastname`) VALUES
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`username`),
-  ADD UNIQUE KEY `username_UNIQUE` (`username`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `nas`
@@ -296,6 +295,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `nas`
 --
 ALTER TABLE `nas`
@@ -311,7 +316,7 @@ ALTER TABLE `radacct`
 -- AUTO_INCREMENT for table `radcheck`
 --
 ALTER TABLE `radcheck`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=483;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=466;
 
 --
 -- AUTO_INCREMENT for table `radgroupcheck`
