@@ -11,7 +11,7 @@ The simplest way to install this app is using Docker.
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
 4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
 
-**Notes about docker configuration:*(
+**Notes about docker configuration:**
 The docker-compose file will create four services: **rad-server**, **mysql-server**, **apache2-server** and **phpmyadmin**. All four containers have network connectivity with each other through static ip's on their own bridge network. Ports are forwarded or exposed as needed.
 
 **mysql**
