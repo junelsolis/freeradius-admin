@@ -1,3 +1,5 @@
-Contributors are welcome.
+**Contributors are welcome here!**
 
-Help is wanted UX and Laravel code.
+- Need help with UX and Laravel.
+- Anyone who can help with securing FreeRADIUS and MySQL.
+- Help make the Docker configs better.
