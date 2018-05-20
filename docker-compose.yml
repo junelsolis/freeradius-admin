@@ -18,17 +18,19 @@ services:
  mysql:
   container_name: mysql-server
   build: ./mysql
-  expose:
-   - "3306"
+  ports:
+   - "3306:3306"
   volumes:
    - ./mysql/srv/conf.d:/etc/mysql/conf.d
    - ./mysql/srv/initdb.d:/docker-entrypoint-initdb.d
    - ./mysql/srv/data:/var/lib/mysql
   environment:
-   MYSQL_ROOT_PASSWORD: password
+    MYSQL_USER: root
+    MYSQL_ROOT_PASSWORD: password
   networks:
    radnet:
     ipv4_address: 172.100.0.101
+  tty: true
 
  apache:
   container_name: apache2-server
@@ -55,6 +57,7 @@ services:
   networks:
     radnet:
       ipv4_address: 172.100.0.103
+  tty: true
 
 networks:
  radnet:
