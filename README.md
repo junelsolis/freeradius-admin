@@ -11,7 +11,11 @@ The simplest way to install this app is using Docker.
 
 The docker-compose file will create three services: **rad-server**, **mysql-server**, and **apache2-server**. The three containers have network connectivity with each other through static ip's on their own bridge network. Ports are forwarded or exposed as needed.
 
-**Important** The docker-compose file is set to port-forward 3306 in case you need direct network access to the MySQL service. If this sort of access is not needed, it should be disabled in production setups by changing the 'port' declaration to 'expose'.
+**Important** 
+
+The docker-compose file is set to port-forward 3306 in case you need direct network access to the MySQL service. If this sort of access is not needed, it should be disabled in production setups by changing the 'port' declaration to 'expose'.
+
+For a production setup, modify the **.env** file located in *./web/src* and make sure **you change the app key**. You can do so by going to a terminal, navigating to the *./web/src* directory, and running ```php artisan key:generate```.
 
 # FreeRADIUS 3 Setup
 In order to use this software, I assume that you already have a FreeRADIUS 3 server set up properly to interface with a MySQL database containing the default FreeRADIUS schema. This project was constructed with the default MySQL schema that comes with FreeRADIUS in mind. If you wish to use this project with a different schema, you will have to change the tables the source code points to.
