@@ -13,7 +13,7 @@ The simplest way to install this app is using Docker.
 
 *Notes about docker configuration:*
 
-The docker-compose file will create four services: **rad-server**, **mysql-server**, **apache2-server** and **phpmyadmin**. The three containers have network connectivity with each other through static ip's on their own bridge network. Ports are forwarded or exposed as needed.
+The docker-compose file will create four services: **rad-server**, **mysql-server**, **apache2-server** and **phpmyadmin**. All four containers have network connectivity with each other through static ip's on their own bridge network. Ports are forwarded or exposed as needed.
 
 The **mysql-server** is configured with a generic username and password. This should be changed in the [docker-compose.yml](docker-compose.yml) file for production setups. The file [radius.sql](radius.sql) is a modified version of the radius MySQL schema included with [freeRADIUS](https://github.com/FreeRADIUS/freeradius-server) distributions. It is loaded by the container on startup if the database and tables do not already exist.
 
