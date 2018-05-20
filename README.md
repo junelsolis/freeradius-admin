@@ -1,7 +1,7 @@
 # FreeRADIUS Admin
 A web interface for FreeRADIUS with a MySQL backend.
 
-Written in PHP7 using the Laravel framework for an installation of FreeRADIUS 3 with a MySQL backend. This app simplifies managing RADIUS users through a web-based GUI and includes some implementation of Simultaneous-Use checking if you want to limit the number of devices that a user is allowed to use. It can be served from the same machine acting as the RADIUS server.
+Need a FreeRADIUS + MySQL + web GUI right away? This application simplifies managing RADIUS users and groups through a web-based GUI. It is built around Docker containers in order to help take the complexity of installing and configuring FreeRADIUS, MySQL, and Apache at the same time. Place it all on one machine, turn the key and it's up.
 
 # Install with Docker
 The simplest way to install this app is using Docker.
