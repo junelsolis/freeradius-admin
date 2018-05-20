@@ -120,15 +120,6 @@ class AdminController extends Controller
       return redirect('/admin')->with('msg', 'Your password has been changed.');
     }
 
-    public function showUserAdd() {
-      $check = checkLoggedIn();
-      if ($check == false) {
-        session()->flush();
-        return redirect('/');
-      }
-
-      return view('userAdd');
-    }
     public function userAdd(Request $request) {
       $check = checkLoggedIn();
       if ($check == false) {

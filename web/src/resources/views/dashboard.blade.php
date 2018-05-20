@@ -29,30 +29,29 @@
 
     </div>
     <div id="content" class='uk-background-muted'>
-      <div class="uk-grid uk-margin-left uk-margin-right uk-margin">
+      <div class="uk-grid uk-margin-left uk-margin-right">
         <div class="uk-width-1-3@s uk-margin-top">
           <h5 class="uk-heading-line"><span><strong>Add User</strong></span></h5>
           <form class='uk-form-horizontal' method="post" action="admin/add-user">
             {{ csrf_field() }}
-              <div class='uk-width-auto@s uk-margin'>
+              <div class='uk-width-small uk-margin'>
                 <input class='uk-input' type='text' placeholder='Username' name='username' required />
               </div>
-              <div class='uk-fieldset uk-margin'>
-                <input class='uk-input uk-width-1-3' type='text' placeholder='Firstname' name='firstname' required />
-                <input class='uk-input uk-width-1-3' type='text' placeholder='Lastname' name='lastname' required />
-              </div>
-
               <fieldset class='uk-fieldset'>
-
-                <input class='uk-input' type='password' placeholder='Password' name='password' required />
+                <input class='uk-input uk-width-small@s' type='text' placeholder='Firstname' name='firstname' required />
+                <input class='uk-input uk-width-small@s' type='text' placeholder='Lastname' name='lastname' required />
+              </fieldset>
+              <fieldset class='uk-fieldset uk-margin'>
+                <input class='uk-input uk-width-small@s' type='password' placeholder='Password' name='password' required />
+                <input class='uk-input uk-width-small@s' type='password' placeholder='Confirm Password' name='confirmPassword' required />
               </fieldset>
 
             <div class="uk-margin">
-              <button class="uk-button uk-button-primary" type="submit"><span uk-icon="icon: user"></span>  Add User</button>
+              <button class="uk-button uk-button-primary" type="submit"><span uk-icon="icon: user"></span> Add User</button>
             </div>
           </form>
         </div>
-        <div class='uk-width-2-3@s uk-margin-top uk-margin-bottom'>
+        <div class='uk-width-2-3@s uk-margin-top'>
           <h5 class="uk-heading-line"><span><strong>Users</strong></span></h5>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum ornare quam, eget eleifend ipsum interdum quis. Suspendisse scelerisque nulla malesuada nibh fermentum, pharetra fermentum velit consequat. Nam et arcu molestie, auctor ex quis, sagittis enim. Nam tincidunt nulla sagittis nisl vulputate aliquam.<br /><br />
         </div>

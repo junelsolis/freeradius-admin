@@ -6,5 +6,14 @@
 }
 
 #content strong {
-  color: rgb(32,142,241);
+  color: rgb(80,80,80);
+}
+
+.uk-button-primary {
+  background-color: rgb(80,80,80);
+}
+
+.uk-button-primary:hover {
+  color: white;
+  background-color: rgb(0,0,0);
 }
