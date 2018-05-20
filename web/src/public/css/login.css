@@ -1,0 +1,14 @@
+
+#title h2 {
+  color: rgb(80,80,80);
+}
+
+#title h2 em {
+  color: rgb(80,80,80);
+}
+
+#footer p {
+  font-size: 0.7em;
+  color: rgb(150,150,150);
+  text-align: center;
+}
