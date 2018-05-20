@@ -8,12 +8,16 @@ The simplest way to install this app is using Docker.
 
 1. Clone this repository
 2. Use the **docker-compose.yml** file to build and run the containers.
+3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
+4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
 
-The docker-compose file will create three services: **rad-server**, **mysql-server**, and **apache2-server**. The three containers have network connectivity with each other through static ip's on their own bridge network. Ports are forwarded or exposed as needed.
+*Notes about docker configuration:*
 
-**Important** 
+The docker-compose file will create four services: **rad-server**, **mysql-server**, **apache2-server** and **phpmyadmin**. The three containers have network connectivity with each other through static ip's on their own bridge network. Ports are forwarded or exposed as needed.
 
-The docker-compose file is set to port-forward 3306 in case you need direct network access to the MySQL service. If this sort of access is not needed, it should be disabled in production setups by changing the 'port' declaration to 'expose'.
+The **mysql-server** is configured with a generic username and password. This should be changed in the [docker-compose.yml](docker-compose.yml) file for production setups. The file [radius.sql](radius.sql) is a modified version of the radius MySQL schema included with [freeRADIUS](https://github.com/FreeRADIUS/freeradius-server) distributions. It is loaded by the container on startup if the database and tables do not already exist.
+
+Furthermore, it is set to port-forward 3306 in case you need direct network access to the MySQL service. If this sort of access is not needed, it should be disabled in production setups by changing the 'port' declaration to 'expose'.
 
 For a production setup, modify the **.env** file located in *./web/src* and make sure **you change the app key**. You can do so by going to a terminal, navigating to the *./web/src* directory, and running ```php artisan key:generate```.
 
