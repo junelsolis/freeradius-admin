@@ -43,6 +43,7 @@ class LoginController extends Controller
     session(['loggedIn' => true]);
     session(['username' => $admin->username]);
     session(['id' => $admin->id]);
+    session(['fullname' => $admin->firstname . ' ' . $admin->lastname]);
 
     return redirect('/admin');
   }

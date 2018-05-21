@@ -18,3 +18,4 @@ Route::get('/admin/logout', 'AdminController@logout');
 
 Route::get('/admin/add-user', 'AdminController@showUserAdd');
 Route::post('/admin/add-user', 'AdminController@userAdd');
+Route::get('/admin/list-users', 'AdminController@showUserList');

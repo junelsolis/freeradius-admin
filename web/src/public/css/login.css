@@ -1,10 +1,22 @@
 
 #title h2 {
-  color: rgb(80,80,80);
+  color: rgb(102,102,102);
 }
 
 #title h2 em {
-  color: rgb(80,80,80);
+  color: rgb(0,77,149);
+}
+
+.uk-button-primary {
+  color: rgb(0,77,149);
+  border-color: rgb(0,77,149);
+  background-color: white;
+}
+
+.uk-botton-primary:hover {
+  color: white;
+  border-color: rgb(0,77,149);
+  background-color: rgb(0,77,149);
 }
 
 #footer p {

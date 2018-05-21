@@ -34,6 +34,25 @@
 
         <form class='uk-form-stacked uk-child-width-1-2@s uk-margin uk-grid' action='/admin/add-user' method='post' uk-grid>
           {{ csrf_field() }}
+
+          @if (session('error'))
+          <div class='uk-width-1-1'>
+            <div class="uk-alert-danger" uk-alert>
+              <a class="uk-alert-close" uk-close></a>
+              <p>{{ session('error')}}</p>
+            </div>
+          </div>
+          @endif
+
+          @if (session('info'))
+          <div class='uk-width-1-1'>
+            <div class="uk-alert-success" uk-alert>
+              <a class="uk-alert-close" uk-close></a>
+              <p>{{ session('info')}}</p>
+            </div>
+          </div>
+          @endif
+
           <div>
             <label class='uk-form-label'>Username</label>
             <input class='uk-input' name='username' type='text' required placeholder='Username' />

@@ -19,15 +19,15 @@ class AdminController extends Controller
       $userFullname = $this->getCurrentUserFullname();
 
       // fetch all users from db
-      $users = DB::table('users')->orderBy('lastname')->get();
-      $users = $this->getUsers($users);
+      // $users = DB::table('users')->orderBy('lastname')->get();
+      // $users = $this->getUsers($users);
 
       return view('dashboard')
-        ->with('groups', $groups)
         ->with('users', $users)
         ->with('userFullname', $userFullname);
 
     }
+
     public function logout() {
       $check = $this->checkLoggedIn();
       if ($check == false) {
@@ -98,6 +98,7 @@ class AdminController extends Controller
         ->with('groups', $groups)
         ->with('userFullname', $userFullname);
     }
+
     public function userAdd(Request $request) {
       $check = $this->checkLoggedIn();
       if ($check == false) {
@@ -178,7 +179,8 @@ class AdminController extends Controller
 
       return redirect('/admin/add-user')->with('info', 'User added to database.');
     }
-    public function userList() {
+
+    public function showUserList() {
       $check = $this->checkLoggedIn();
       if ($check == false) {
         session()->flush();
@@ -186,6 +188,13 @@ class AdminController extends Controller
       }
 
       // get all users
+      $users = DB::table('users')->orderBy('lastname')->get();
+      $users = $this->getUsers($users);
+
+      return $users;
+      return view('userList')
+        ->with('users', $users);
+
     }
 
     /////////////////////////////////////////////////////
@@ -205,6 +214,7 @@ class AdminController extends Controller
         return true;
       }
     }
+
     private function checkPassword($password, $confirmPassword, $fname, $lname) {
 
       // convert names to lowercase strings
@@ -234,6 +244,7 @@ class AdminController extends Controller
       return true;
 
     }
+
     private function getUsers($users) {
 
       $radcheck = DB::table('radcheck')->where('attribute', 'Simultaneous-Use')->get();
@@ -255,6 +266,7 @@ class AdminController extends Controller
 
       return $users;
     }
+
     private function getCurrentUserFullname() {
       $id = session('id');
       $user = DB::table('admins')->where('id', $id)->first();

@@ -7,7 +7,7 @@
 }
 
 #header em {
-  color: rgb(149,218,19);
+  color: rgb(0,77,149);
   /* color: rgb(5,133,169); */
 }
 
@@ -16,19 +16,24 @@
 }
 
 #content h2 {
-  color: rgb(102,102,102);
+  color: rgb(0,77,149);
 }
 
 .uk-form-label {
   color: rgb(102,102,102);
 }
-.uk-button-primary {
-  border-color: rgb(149,218,19);
+
+#content .uk-button-primary {
+  border-color: rgb(0,77,149);
   background-color: white;
-  color: rgb(149,218,19);
+  color: rgb(0,77,149);
 }
 
-.uk-button-primary:hover {
-  background-color: rgb(149,218,19);
+#content .uk-button-primary:hover {
+  background-color: rgb(0,77,149);
   color: white;
+}
+
+td a {
+  color: rgb(102,102,102);
 }
