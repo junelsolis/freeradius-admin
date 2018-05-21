@@ -28,9 +28,9 @@
     <div id="statistics">
 
     </div>
-    <div id="content" class='uk-background-muted'>
-      <div class="uk-grid uk-margin-left uk-margin-right">
-        <div class="uk-width-1-3@s uk-margin-top">
+    <div id="users" class='uk-background-muted'>
+      <div class="uk-grid">
+        <div class="uk-width-1-1 uk-margin-top">
           <h5 class="uk-heading-line"><span><strong>Add User</strong></span></h5>
 
 
@@ -47,39 +47,71 @@
           </div>
           @endif
 
+          <div class='uk-width-2-3@s'>
+            <form method="post" action="admin/add-user">
+              {{ csrf_field() }}
+              <div class='uk-grid'>
+                <div class='uk-width-1-6@s'>
+                  <input class='uk-input' type='text' placeholder='Username' name='username' required />
+                </div>
+                <fieldset class='uk-fieldset'>
+                  <input class='uk-input uk-width-1-2@s' type='text' placeholder='Firstname' name='firstname' required />
+                  <input class='uk-input uk-width-1-2@s' type='text' placeholder='Lastname' name='lastname' required />
+                  <input class='uk-input uk-width-1-6@s' type='password' placeholder='Password' name='password' required />
+                  <input class='uk-input uk-width-1-6@s' type='password' placeholder='Confirm Password' name='confirmPassword' required />
+                </fieldset>
 
-          <form method="post" action="admin/add-user">
-            {{ csrf_field() }}
-              <div class='uk-width-small uk-margin'>
-                <input class='uk-input' type='text' placeholder='Username' name='username' required />
+                <fieldset class='uk-fieldset uk-margin '>
+                  <!-- <label class='uk-form-label'>Group</label> -->
+                  <select class='uk-select uk-width-small@s' name='group'>
+                    <option>Select Group</option>
+                    @foreach ($groups as $group)
+                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                    @endforeach
+                  </select>
+                  <input type='number' class='uk-input uk-width-small@s' name='logins' placeholder='Allowed Logins' required />
+
+                </fieldset>
+              <div class="uk-margin">
+                <button class="uk-button uk-button-primary" type="submit"><span uk-icon="icon: user"></span> Add User</button>
               </div>
-              <fieldset class='uk-fieldset'>
-                <input class='uk-input uk-width-small@s' type='text' placeholder='Firstname' name='firstname' required />
-                <input class='uk-input uk-width-small@s' type='text' placeholder='Lastname' name='lastname' required />
-              </fieldset>
-              <fieldset class='uk-fieldset uk-margin'>
-                <input class='uk-input uk-width-small@s' type='password' placeholder='Password' name='password' required />
-                <input class='uk-input uk-width-small@s' type='password' placeholder='Confirm Password' name='confirmPassword' required />
-              </fieldset>
-              <fieldset class='uk-fieldset uk-margin '>
-                <!-- <label class='uk-form-label'>Group</label> -->
-                <select class='uk-select uk-width-small@s' name='group'>
-                  <option>Select Group</option>
-                  @foreach ($groups as $group)
-                  <option value="{{ $group->id }}">{{ $group->name }}</option>
-                  @endforeach
-                </select>
-                <input type='number' class='uk-input uk-width-small@s' name='logins' placeholder='Allowed Logins' required />
+              </div>
 
-              </fieldset>
-            <div class="uk-margin">
-              <button class="uk-button uk-button-primary" type="submit"><span uk-icon="icon: user"></span> Add User</button>
-            </div>
-          </form>
+            </form>
+          </div>
+          <div class='uk-width-1-3@s'>
+
+          </div>
         </div>
+
+
+
         <div class='uk-width-2-3@s uk-margin-top'>
           <h5 class="uk-heading-line"><span><strong>Users</strong></span></h5>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum ornare quam, eget eleifend ipsum interdum quis. Suspendisse scelerisque nulla malesuada nibh fermentum, pharetra fermentum velit consequat. Nam et arcu molestie, auctor ex quis, sagittis enim. Nam tincidunt nulla sagittis nisl vulputate aliquam.<br /><br />
+          <table class="uk-table uk-table-small uk-table-striped">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>PWD Strength</th>
+                <th>Allowed Logins</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($users as $user)
+              <tr>
+                <td>{{ $user->username }}</td>
+                <td>{{ $user->fullname }}</td>
+                <td></td>
+                <td>{{ $user->logins }}</td>
+                <td>
+                  <a class="uk-button uk-button-primary uk-button-small">Modify</a>
+                  <a class="uk-button uk-button-danger uk-button-small">Delete</a>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

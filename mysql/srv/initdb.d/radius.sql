@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 172.100.0.101
--- Generation Time: May 20, 2018 at 11:59 AM
+-- Generation Time: May 20, 2018 at 05:26 PM
 -- Server version: 5.7.22
 -- PHP Version: 7.2.4
 
@@ -30,13 +30,14 @@ USE `radius`;
 -- Table structure for table `admins`
 --
 
-CREATE TABLE `admins` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `password` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `admins`
@@ -51,11 +52,21 @@ INSERT INTO `admins` (`id`, `username`, `firstname`, `lastname`, `password`) VAL
 -- Table structure for table `groups`
 --
 
-CREATE TABLE `groups` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
-  `description` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`, `description`) VALUES
+(1, 'staff', NULL),
+(3, 'engineers', NULL),
+(5, 'default', NULL);
 
 -- --------------------------------------------------------
 
@@ -63,8 +74,8 @@ CREATE TABLE `groups` (
 -- Table structure for table `nas`
 --
 
-CREATE TABLE `nas` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `nas` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `nasname` varchar(128) CHARACTER SET latin1 NOT NULL,
   `shortname` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
   `type` varchar(30) CHARACTER SET latin1 DEFAULT 'other',
@@ -72,7 +83,9 @@ CREATE TABLE `nas` (
   `secret` varchar(60) CHARACTER SET latin1 NOT NULL DEFAULT 'secret',
   `server` varchar(64) CHARACTER SET latin1 DEFAULT NULL,
   `community` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET latin1 DEFAULT 'RADIUS Client'
+  `description` varchar(200) CHARACTER SET latin1 DEFAULT 'RADIUS Client',
+  PRIMARY KEY (`id`),
+  KEY `nasname` (`nasname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -81,8 +94,8 @@ CREATE TABLE `nas` (
 -- Table structure for table `radacct`
 --
 
-CREATE TABLE `radacct` (
-  `radacctid` bigint(21) NOT NULL,
+CREATE TABLE IF NOT EXISTS `radacct` (
+  `radacctid` bigint(21) NOT NULL AUTO_INCREMENT,
   `acctsessionid` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `acctuniqueid` varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `username` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
@@ -106,7 +119,17 @@ CREATE TABLE `radacct` (
   `acctterminatecause` varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `servicetype` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
   `framedprotocol` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
-  `framedipaddress` varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT ''
+  `framedipaddress` varchar(15) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  PRIMARY KEY (`radacctid`),
+  UNIQUE KEY `acctuniqueid` (`acctuniqueid`),
+  KEY `username` (`username`),
+  KEY `framedipaddress` (`framedipaddress`),
+  KEY `acctsessionid` (`acctsessionid`),
+  KEY `acctsessiontime` (`acctsessiontime`),
+  KEY `acctstarttime` (`acctstarttime`),
+  KEY `acctinterval` (`acctinterval`),
+  KEY `acctstoptime` (`acctstoptime`),
+  KEY `nasipaddress` (`nasipaddress`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -115,13 +138,15 @@ CREATE TABLE `radacct` (
 -- Table structure for table `radcheck`
 --
 
-CREATE TABLE `radcheck` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `radcheck` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `attribute` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `op` char(2) CHARACTER SET latin1 NOT NULL DEFAULT '==',
-  `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`(32))
+) ENGINE=InnoDB AUTO_INCREMENT=466 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `radcheck`
@@ -137,12 +162,14 @@ INSERT INTO `radcheck` (`id`, `username`, `attribute`, `op`, `value`) VALUES
 -- Table structure for table `radgroupcheck`
 --
 
-CREATE TABLE `radgroupcheck` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `radgroupcheck` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `groupname` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `attribute` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `op` char(2) CHARACTER SET latin1 NOT NULL DEFAULT '==',
-  `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT ''
+  `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `groupname` (`groupname`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -151,12 +178,14 @@ CREATE TABLE `radgroupcheck` (
 -- Table structure for table `radgroupreply`
 --
 
-CREATE TABLE `radgroupreply` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `radgroupreply` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `groupname` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `attribute` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `op` char(2) CHARACTER SET latin1 NOT NULL DEFAULT '=',
-  `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT ''
+  `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `groupname` (`groupname`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -165,12 +194,13 @@ CREATE TABLE `radgroupreply` (
 -- Table structure for table `radpostauth`
 --
 
-CREATE TABLE `radpostauth` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `radpostauth` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `pass` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `reply` varchar(32) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `authdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `authdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -179,12 +209,14 @@ CREATE TABLE `radpostauth` (
 -- Table structure for table `radreply`
 --
 
-CREATE TABLE `radreply` (
-  `id` int(11) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `radreply` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `attribute` varchar(64) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `op` char(2) CHARACTER SET latin1 NOT NULL DEFAULT '=',
-  `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT ''
+  `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -193,10 +225,11 @@ CREATE TABLE `radreply` (
 -- Table structure for table `radusergroup`
 --
 
-CREATE TABLE `radusergroup` (
+CREATE TABLE IF NOT EXISTS `radusergroup` (
   `username` varchar(64) NOT NULL DEFAULT '',
   `groupname` varchar(64) NOT NULL DEFAULT '',
-  `priority` int(11) NOT NULL DEFAULT '1'
+  `priority` int(11) NOT NULL DEFAULT '1',
+  KEY `username` (`username`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -213,10 +246,11 @@ INSERT INTO `radusergroup` (`username`, `groupname`, `priority`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(40) NOT NULL,
   `firstname` varchar(50) NOT NULL,
-  `lastname` varchar(50) NOT NULL
+  `lastname` varchar(50) NOT NULL,
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -225,148 +259,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `firstname`, `lastname`) VALUES
 ('testuser', 'Test', 'User');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `groups`
---
-ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `nas`
---
-ALTER TABLE `nas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `nasname` (`nasname`);
-
---
--- Indexes for table `radacct`
---
-ALTER TABLE `radacct`
-  ADD PRIMARY KEY (`radacctid`),
-  ADD UNIQUE KEY `acctuniqueid` (`acctuniqueid`),
-  ADD KEY `username` (`username`),
-  ADD KEY `framedipaddress` (`framedipaddress`),
-  ADD KEY `acctsessionid` (`acctsessionid`),
-  ADD KEY `acctsessiontime` (`acctsessiontime`),
-  ADD KEY `acctstarttime` (`acctstarttime`),
-  ADD KEY `acctinterval` (`acctinterval`),
-  ADD KEY `acctstoptime` (`acctstoptime`),
-  ADD KEY `nasipaddress` (`nasipaddress`);
-
---
--- Indexes for table `radcheck`
---
-ALTER TABLE `radcheck`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username` (`username`(32));
-
---
--- Indexes for table `radgroupcheck`
---
-ALTER TABLE `radgroupcheck`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `groupname` (`groupname`(32));
-
---
--- Indexes for table `radgroupreply`
---
-ALTER TABLE `radgroupreply`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `groupname` (`groupname`(32));
-
---
--- Indexes for table `radpostauth`
---
-ALTER TABLE `radpostauth`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `radreply`
---
-ALTER TABLE `radreply`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username` (`username`(32));
-
---
--- Indexes for table `radusergroup`
---
-ALTER TABLE `radusergroup`
-  ADD KEY `username` (`username`(32));
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admins`
---
-ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `groups`
---
-ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `nas`
---
-ALTER TABLE `nas`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `radacct`
---
-ALTER TABLE `radacct`
-  MODIFY `radacctid` bigint(21) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `radcheck`
---
-ALTER TABLE `radcheck`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=466;
-
---
--- AUTO_INCREMENT for table `radgroupcheck`
---
-ALTER TABLE `radgroupcheck`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `radgroupreply`
---
-ALTER TABLE `radgroupreply`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `radpostauth`
---
-ALTER TABLE `radpostauth`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `radreply`
---
-ALTER TABLE `radreply`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{ asset('css/uikit.min.css') }}" />
   <!-- UIkit JS -->
   <script src="{{ asset('js/uikit.min.js') }}"></script>
-  <script src="{{ asset('js/uikit.icons.min.js') }}"></script>
+  <script src="{{ asset('js/uikit-icons.min.js') }}"></script>
 
   <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
   <title>FreeRADIUS Admin</title>
@@ -44,7 +44,8 @@
       <div id="footer">
         <br /><br />
         <p>
-          This is open-source software created by Junel Solis.<br />Project repository on <a href="https://github.com/junelsolis/web-freeradius-mysql" target="_blank">Github</a>.
+          <span uk-icon="icon: file-edit"></span> by Dr. Junel Solis on <span uk-icon="icon: github"></span> GitHub<br />
+          FreeRADIUS Admin is <a href="https://github.com/junelsolis/web-freeradius-mysql">open source</a>.
         </p>
       </div>
     </div>
