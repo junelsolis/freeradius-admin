@@ -161,11 +161,15 @@ class AdminController extends Controller
 
       return redirect('/admin')->with('info', 'User added to database.');
     }
+    public function userList() {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
 
-    public function showUserModify() {}
-    public function userModify() {}
-
-    public function userDelete(Request $request) {}
+      // get all users
+    }
 
     /////////////////////////////////////////////////////
     /////////////////////////////////////////////////////

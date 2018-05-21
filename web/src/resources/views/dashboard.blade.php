@@ -28,7 +28,7 @@
     <div id="statistics">
 
     </div>
-    <div id='users' class='uk-grid uk-margin-left uk-margin-right uk-margin-bottom'>
+    <div id='users' class='uk-grid uk-margin-left uk-margin-right'>
       <div class='uk-width-1-3@s'>
         <h5 class="uk-heading-line"><span><strong>New User</strong></span></h5>
 
@@ -45,7 +45,7 @@
         </div>
         @endif
 
-        <form method='post' action='admin/add-user'>
+        <form class='uk-form-stacked' method='post' action='admin/add-user'>
           {{ csrf_field() }}
           <div class='uk-grid uk-child-width-1-2@s'>
             <div class='uk-margin-bottom'>
@@ -76,7 +76,7 @@
             <div class='uk-margin-bottom'>
               <input type='number' class='uk-input' name='logins' placeholder='Allowed Logins' required />
             </div>
-            <div>
+            <div class='uk-margin-bottom'>
               <button class="uk-button uk-button-primary" type="submit"><span uk-icon="icon: user"></span> Add User</button>
             </div>
           </div>
@@ -86,26 +86,28 @@
 
       <div class='uk-width-2-3@s'>
         <h5 class="uk-heading-line"><span><strong>Users</strong></span></h5>
-        <div class='uk-grid uk-child-width-1-4@s uk-text-center uk-margin-left'>
+        <div class='uk-grid uk-child-width-1-4@s uk-text-center'>
           <div>
             <a href="admin/list-users">
-            <span uk-icon="icon: users; ratio: 3"></span><br /><br />
+            <span uk-icon="icon: users; ratio: 2.5"></span><br /><br />
             List All</a>
           </div>
           <div>
             <a href="admin/list-users">
-            <span uk-icon="icon: minus-circle; ratio: 3"></span><br /><br />
+            <span uk-icon="icon: minus-circle; ratio: 2.5"></span><br /><br />
             Remove</a>
           </div>
           <div>
             <a href="admin/list-users">
-            <span uk-icon="icon: world; ratio: 3"></span><br /><br />
+            <span uk-icon="icon: world; ratio: 2.5"></span><br /><br />
             Group Memberships</a>
           </div>
         </div>
       </div>
     </div>
+    <div id='groups' class='uk-grid uk-margin-left uk-margin-right'>
 
+    </div>
     <div id="">
       <div class="uk-grid">
 
