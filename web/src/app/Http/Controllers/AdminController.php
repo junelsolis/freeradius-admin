@@ -23,7 +23,6 @@ class AdminController extends Controller
       // $users = $this->getUsers($users);
 
       return view('dashboard')
-        ->with('users', $users)
         ->with('userFullname', $userFullname);
 
     }
@@ -191,7 +190,6 @@ class AdminController extends Controller
       $users = DB::table('users')->orderBy('lastname')->get();
       $users = $this->getUsers($users);
 
-      return $users;
       return view('userList')
         ->with('users', $users);
 

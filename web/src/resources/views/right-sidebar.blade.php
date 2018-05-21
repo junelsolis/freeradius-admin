@@ -8,8 +8,8 @@
       <a href="/admin/logout"><span uk-icon="sign-out"></span>&nbsp;Logout</a>
       <div id='menu-footer' class='uk-margin-top'>
         <br />
-        Author: <strong>Junel&nbsp;Solis</strong><br />
-        This software is <a href="#">open source</a>.
+        Author: <strong>Junel&nbsp;Solis&nbsp;MD</strong><br />
+        This software is <a href="https://github.com/junelsolis/freeradius-admin">open source</a>.
       </div>
       <style>
         #menu-footer {
