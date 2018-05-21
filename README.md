@@ -9,7 +9,7 @@ The simplest way to install this app is using Docker.
 1. Clone this repository
 2. Use the **docker-compose.yml** file to build and run the containers.
 3. Run this command in your container host: 
-```docker container exec apache2-server chown -R /var/www/html && chmod -R 775 /var/www/html```
+```docker container exec apache2-server chown -R www-data:www-data /var/www/html && chmod -R 775 /var/www/html```
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
 4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
 
