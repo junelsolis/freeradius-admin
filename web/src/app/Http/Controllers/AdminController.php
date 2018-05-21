@@ -15,8 +15,8 @@ class AdminController extends Controller
         return redirect('/');
       }
 
-      // fetch from db
-      $groups = DB::table('groups')->orderBy('name')->get();
+      // get current user's name
+      $userFullname = $this->getCurrentUserFullname();
 
       // fetch all users from db
       $users = DB::table('users')->orderBy('lastname')->get();
@@ -24,11 +24,12 @@ class AdminController extends Controller
 
       return view('dashboard')
         ->with('groups', $groups)
-        ->with('users', $users);
+        ->with('users', $users)
+        ->with('userFullname', $userFullname);
 
     }
     public function logout() {
-      $check = checkLoggedIn();
+      $check = $this->checkLoggedIn();
       if ($check == false) {
         session()->flush();
         return redirect('/');
@@ -81,6 +82,22 @@ class AdminController extends Controller
       return redirect('/admin')->with('msg', 'Your password has been changed.');
     }
 
+    public function showUserAdd() {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $userFullname = $this->getCurrentUserFullname();
+
+      // fetch from groups db
+      $groups = DB::table('groups')->orderBy('name')->get();
+
+      return view('userAdd')
+        ->with('groups', $groups)
+        ->with('userFullname', $userFullname);
+    }
     public function userAdd(Request $request) {
       $check = $this->checkLoggedIn();
       if ($check == false) {
@@ -159,7 +176,7 @@ class AdminController extends Controller
         'value' => $logins
       ]);
 
-      return redirect('/admin')->with('info', 'User added to database.');
+      return redirect('/admin/add-user')->with('info', 'User added to database.');
     }
     public function userList() {
       $check = $this->checkLoggedIn();
@@ -237,6 +254,20 @@ class AdminController extends Controller
       }
 
       return $users;
+    }
+    private function getCurrentUserFullname() {
+      $id = session('id');
+      $user = DB::table('admins')->where('id', $id)->first();
+
+      if (empty($user)) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $firstname = $user->firstname;
+      $lastname = $user->lastname;
+
+      return $firstname . ' ' . $lastname;
     }
 
 }
