@@ -18,8 +18,13 @@ class AdminController extends Controller
       // fetch from db
       $groups = DB::table('groups')->orderBy('name')->get();
 
+      // fetch all users from db
+      $users = DB::table('users')->orderBy('lastname')->get();
+      $users = $this->getUsers($users);
+
       return view('dashboard')
-        ->with('groups', $groups);
+        ->with('groups', $groups)
+        ->with('users', $users);
 
     }
     public function logout() {
@@ -207,6 +212,27 @@ class AdminController extends Controller
 
       return true;
 
+    }
+    private function getUsers($users) {
+
+      $radcheck = DB::table('radcheck')->where('attribute', 'Simultaneous-Use')->get();
+      $radusergroup = DB::table('radusergroup')->get();
+
+      foreach ($users as $user) {
+
+        // allowed logins
+        $logins = $radcheck->where('username', $user->username)->pluck('value')->first();
+        $user->logins = $logins;
+
+        // user group
+        $group = $radusergroup->where('username', $user->username)->pluck('groupname')->first();
+        $user->group = $group;
+
+        // concatenate fullname
+        $user->fullname = $user->firstname . ' ' . $user->lastname;
+      }
+
+      return $users;
     }
 
 }

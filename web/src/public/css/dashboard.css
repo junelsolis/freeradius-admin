@@ -5,7 +5,7 @@
   color: rgb(80,80,80);
 }
 
-#content strong {
+#users strong {
   color: rgb(80,80,80);
 }
 
@@ -16,4 +16,8 @@
 .uk-button-primary:hover {
   color: white;
   background-color: rgb(0,0,0);
+}
+
+.uk-button-danger {
+  background-color: rgb(255,176,66);
 }
