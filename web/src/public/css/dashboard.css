@@ -1,9 +1,9 @@
-#header {
+/* #header {
   background-color: rgb(80,80,80);
-}
+} */
 
 #header h2 {
-  color: white;
+  color: rgb(102,102,102);
 }
 
 #header em {
@@ -13,4 +13,22 @@
 
 #right-sidebar a {
   color: rgb(102,102,102);
+}
+
+#content h2 {
+  color: rgb(102,102,102);
+}
+
+.uk-form-label {
+  color: rgb(102,102,102);
+}
+.uk-button-primary {
+  border-color: rgb(149,218,19);
+  background-color: white;
+  color: rgb(149,218,19);
+}
+
+.uk-button-primary:hover {
+  background-color: rgb(149,218,19);
+  color: white;
 }
