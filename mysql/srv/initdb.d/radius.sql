@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 172.100.0.101
--- Generation Time: May 20, 2018 at 05:26 PM
+-- Generation Time: May 21, 2018 at 11:32 AM
 -- Server version: 5.7.22
 -- PHP Version: 7.2.4
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `name` varchar(30) NOT NULL,
   `description` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `groups`
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `radcheck` (
   `value` varchar(253) CHARACTER SET latin1 NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `username` (`username`(32))
-) ENGINE=InnoDB AUTO_INCREMENT=466 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=478 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `radcheck`
@@ -154,7 +154,19 @@ CREATE TABLE IF NOT EXISTS `radcheck` (
 
 INSERT INTO `radcheck` (`id`, `username`, `attribute`, `op`, `value`) VALUES
 (464, 'testuser', 'SHA-Password', ':=', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),
-(465, 'testuser', 'Simultaneous-Use', ':=', '1');
+(465, 'testuser', 'Simultaneous-Use', ':=', '1'),
+(466, 'solisj', 'SHA-Password', ':=', 'a2ee0f76ca756eb81c32b5a413d94ec7fee3726d'),
+(467, 'solisj', 'Simultaneous-Use', ':=', '2'),
+(468, 'khana', 'SHA-Password', ':=', 'a2ee0f76ca756eb81c32b5a413d94ec7fee3726d'),
+(469, 'khana', 'Simultaneous-Use', ':=', '5'),
+(470, 'james.bond', 'SHA-Password', ':=', 'a2ee0f76ca756eb81c32b5a413d94ec7fee3726d'),
+(471, 'james.bond', 'Simultaneous-Use', ':=', '8'),
+(472, 'harrison.ford', 'SHA-Password', ':=', 'a2ee0f76ca756eb81c32b5a413d94ec7fee3726d'),
+(473, 'harrison.ford', 'Simultaneous-Use', ':=', '10'),
+(474, 'michael.phelps', 'SHA-Password', ':=', '0f47d148a94d7c492327aee00986b24503b0667b'),
+(475, 'michael.phelps', 'Simultaneous-Use', ':=', '2'),
+(476, 'tomo', 'SHA-Password', ':=', '0f47d148a94d7c492327aee00986b24503b0667b'),
+(477, 'tomo', 'Simultaneous-Use', ':=', '8');
 
 -- --------------------------------------------------------
 
@@ -238,7 +250,13 @@ CREATE TABLE IF NOT EXISTS `radusergroup` (
 
 INSERT INTO `radusergroup` (`username`, `groupname`, `priority`) VALUES
 ('testuser', 'group1', 1),
-('testuser', 'group1', 1);
+('testuser', 'group1', 1),
+('solisj', 'engineers', 1),
+('khana', 'staff', 1),
+('james.bond', 'engineers', 1),
+('harrison.ford', 'engineers', 1),
+('michael.phelps', 'staff', 1),
+('tomo', 'staff', 1);
 
 -- --------------------------------------------------------
 
@@ -247,18 +265,26 @@ INSERT INTO `radusergroup` (`username`, `groupname`, `priority`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`username`, `firstname`, `lastname`) VALUES
-('testuser', 'Test', 'User');
+INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`) VALUES
+(1, 'harrison.ford', 'Harrison', 'Ford'),
+(2, 'james.bond', 'James', 'Bond'),
+(3, 'khana', 'Acsah', 'Khan'),
+(4, 'michael.phelps', 'Michael', 'Phelps'),
+(5, 'solisj', 'Junel', 'Solis'),
+(6, 'testuser', 'Test', 'User'),
+(7, 'tomo', 'Tom', 'Ongaro');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
