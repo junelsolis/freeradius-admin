@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}" />
   <title>FreeRADIUS Admin</title>
 </head>
-<body>
-  <div class='uk-container'>
-    <div id="header" class='uk-background-muted'>
+<body class='uk-background-muted' style="height: 100vh;">
+  <div>
+    <div id="header">
       <div class="uk-grid">
         <div class="uk-width-1-2">
           <h3 class="uk-margin-left"><strong><em>FreeRADIUS</em></strong>Admin</h3>
@@ -28,65 +28,92 @@
     <div id="statistics">
 
     </div>
-    <div id="users" class='uk-background-muted'>
+    <div id='users' class='uk-grid uk-margin-left uk-margin-right uk-margin-bottom'>
+      <div class='uk-width-1-3@s'>
+        <h5 class="uk-heading-line"><span><strong>New User</strong></span></h5>
+
+        @if (session('error'))
+        <div class="uk-alert-warning" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>{{ session('error') }}</p>
+        </div>
+        @endif
+        @if (session('info'))
+        <div class='uk-alert-success' uk-alert>
+          <a class='uk-alert-close' uk-close></a>
+          <p>{{ session('info') }}</p>
+        </div>
+        @endif
+
+        <form method='post' action='admin/add-user'>
+          {{ csrf_field() }}
+          <div class='uk-grid uk-child-width-1-2@s'>
+            <div class='uk-margin-bottom'>
+              <input class='uk-input' type='text' name='username' placeholder='Username' required />
+            </div>
+            <div class=''>
+            </div>
+            <div class='uk-margin-bottom'>
+              <input class='uk-input' type='text' name='firstname' placeholder='Firstname' required />
+            </div>
+            <div class='uk-margin-bottom'>
+              <input class='uk-input' type='text' name='lastname' placeholder="Lastname" required />
+            </div>
+            <div class='uk-margin-bottom'>
+              <input class='uk-input' type='password' name='password' placeholder='Password' required />
+            </div>
+            <div class='uk-margin-bottom'>
+              <input class='uk-input' type='password' name='confirmPassword' placeholder='Confirm Password' required />
+            </div>
+            <div class='uk-margin-bottom'>
+              <select class='uk-select' name='group' required>
+                <option>Select Group</option>
+                @foreach ($groups as $group)
+                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class='uk-margin-bottom'>
+              <input type='number' class='uk-input' name='logins' placeholder='Allowed Logins' required />
+            </div>
+            <div>
+              <button class="uk-button uk-button-primary" type="submit"><span uk-icon="icon: user"></span> Add User</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+      <div class='uk-width-2-3@s'>
+        <h5 class="uk-heading-line"><span><strong>Users</strong></span></h5>
+        <div class='uk-grid uk-child-width-1-4@s uk-text-center uk-margin-left'>
+          <div>
+            <a href="admin/list-users">
+            <span uk-icon="icon: users; ratio: 3"></span><br /><br />
+            List All</a>
+          </div>
+          <div>
+            <a href="admin/list-users">
+            <span uk-icon="icon: minus-circle; ratio: 3"></span><br /><br />
+            Remove</a>
+          </div>
+          <div>
+            <a href="admin/list-users">
+            <span uk-icon="icon: world; ratio: 3"></span><br /><br />
+            Group Memberships</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="">
       <div class="uk-grid">
-        <div class="uk-width-1-1 uk-margin-top">
-          <h5 class="uk-heading-line"><span><strong>Add User</strong></span></h5>
 
-
-          @if (session('error'))
-          <div class="uk-alert-warning" uk-alert>
-            <a class="uk-alert-close" uk-close></a>
-            <p>{{ session('error') }}</p>
-          </div>
-          @endif
-          @if (session('info'))
-          <div class='uk-alert-success' uk-alert>
-            <a class='uk-alert-close' uk-close></a>
-            <p>{{ session('info') }}</p>
-          </div>
-          @endif
-
-          <div class='uk-width-2-3@s'>
-            <form method="post" action="admin/add-user">
-              {{ csrf_field() }}
-              <div class='uk-grid'>
-                <div class='uk-width-1-6@s'>
-                  <input class='uk-input' type='text' placeholder='Username' name='username' required />
-                </div>
-                <fieldset class='uk-fieldset'>
-                  <input class='uk-input uk-width-1-2@s' type='text' placeholder='Firstname' name='firstname' required />
-                  <input class='uk-input uk-width-1-2@s' type='text' placeholder='Lastname' name='lastname' required />
-                  <input class='uk-input uk-width-1-6@s' type='password' placeholder='Password' name='password' required />
-                  <input class='uk-input uk-width-1-6@s' type='password' placeholder='Confirm Password' name='confirmPassword' required />
-                </fieldset>
-
-                <fieldset class='uk-fieldset uk-margin '>
-                  <!-- <label class='uk-form-label'>Group</label> -->
-                  <select class='uk-select uk-width-small@s' name='group'>
-                    <option>Select Group</option>
-                    @foreach ($groups as $group)
-                    <option value="{{ $group->id }}">{{ $group->name }}</option>
-                    @endforeach
-                  </select>
-                  <input type='number' class='uk-input uk-width-small@s' name='logins' placeholder='Allowed Logins' required />
-
-                </fieldset>
-              <div class="uk-margin">
-                <button class="uk-button uk-button-primary" type="submit"><span uk-icon="icon: user"></span> Add User</button>
-              </div>
-              </div>
-
-            </form>
-          </div>
-          <div class='uk-width-1-3@s'>
-
-          </div>
         </div>
 
 
 
-        <div class='uk-width-2-3@s uk-margin-top'>
+        <!-- <div class='uk-width-2-3@s uk-margin-top'>
           <h5 class="uk-heading-line"><span><strong>Users</strong></span></h5>
           <table class="uk-table uk-table-small uk-table-striped">
             <thead>
@@ -112,7 +139,7 @@
               @endforeach
             </tbody>
           </table>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
