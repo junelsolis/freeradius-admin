@@ -195,6 +195,42 @@ class AdminController extends Controller
 
     }
 
+    public function showUserDelete() {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      // get users
+      $users = DB::table('users')->orderBy('lastname')->get();
+      $users = $this->getUsers($users);
+
+      return view('userDelete')
+        ->with('users', $users);
+    }
+
+    public function userDelete(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $ids = $request['ids'];
+
+      if (empty($ids)) {
+          return back()->with('error', 'No users selected for deletion.');
+      }
+
+      $count = $this->deleteUsers($ids);
+
+      return redirect('/admin/delete-users')->with('info', $count . ' users deleted.');
+    }
+
+
+
+
     /////////////////////////////////////////////////////
     /////////////////////////////////////////////////////
     // PRIVATE FUNCTIONS
@@ -279,5 +315,21 @@ class AdminController extends Controller
 
       return $firstname . ' ' . $lastname;
     }
+    private function deleteUsers($ids) {
 
+      // get collection of usernames
+      $usernames = DB::table('users')->whereIn('id', $ids)->pluck('username');
+
+      // delete from radusergroup
+      DB::table('radusergroup')->whereIn('username', $usernames)->delete();
+
+      // delete from radcheck
+      DB::table('radcheck')->whereIn('username', $usernames)->delete();
+
+      // delete from users
+      DB::table('users')->whereIn('username', $usernames)->delete();
+
+      return count($usernames);
+
+    }
 }
