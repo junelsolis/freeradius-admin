@@ -19,3 +19,5 @@ Route::get('/admin/logout', 'AdminController@logout');
 Route::get('/admin/add-user', 'AdminController@showUserAdd');
 Route::post('/admin/add-user', 'AdminController@userAdd');
 Route::get('/admin/list-users', 'AdminController@showUserList');
+Route::get('/admin/delete-users', 'AdminController@showUserDelete');
+Route::post('/admin/delete-users', 'AdminController@userDelete');

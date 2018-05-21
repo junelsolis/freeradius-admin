@@ -9,7 +9,7 @@
       <div id='menu-footer' class='uk-margin-top'>
         <br />
         Author: <strong>Junel&nbsp;Solis&nbsp;MD</strong><br />
-        This software is <a href="https://github.com/junelsolis/freeradius-admin">open source</a>.
+        This software is <a href="https://github.com/junelsolis/freeradius-admin" target="_blank">open source</a>.
       </div>
       <style>
         #menu-footer {
