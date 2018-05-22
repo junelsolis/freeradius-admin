@@ -26,7 +26,7 @@ services:
    - ./mysql/srv/data:/var/lib/mysql
   environment:
     MYSQL_USER: root
-    MYSQL_ROOT_PASSWORD: L1u4ju1#BWnh
+    MYSQL_ROOT_PASSWORD: L1u4ju1BWnh
   networks:
    radnet:
     ipv4_address: 172.100.0.101
