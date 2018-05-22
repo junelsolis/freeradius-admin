@@ -40,25 +40,25 @@ services:
     volumes:
      - "./web/src:/var/www/html"
      - ".le:/etc/letsencrypt"
-     - "./web/conf:/etc/apache2"
+     - "./web/conf/sites-enabled:/etc/apache2/sites-enabled"
     networks:
      radnet:
       ipv4_address: 172.100.0.102
     tty: true
 
- phpmyadmin:
-  container_name: fradmin-pma
-  build: ./phpmyadmin
-  ports:
-   - "8080:80"
-  environment:
-    PMA_HOST: 172.100.0.101
-    PMA_USER: root
-    PMA_PASSWORD: password
-  networks:
-    radnet:
-      ipv4_address: 172.100.0.103
-  tty: true
+  phpmyadmin:
+    container_name: fradmin-pma
+    build: ./phpmyadmin
+    ports:
+     - "8080:80"
+    environment:
+      PMA_HOST: 172.100.0.101
+      PMA_USER: root
+      PMA_PASSWORD: password
+    networks:
+      radnet:
+        ipv4_address: 172.100.0.103
+    tty: true
 
 networks:
  radnet:
