@@ -13,6 +13,8 @@
       <li><a href="#">List All</a></li>
       <li class='uk-nav-divider'></li>
 
+      <li class='uk-nav-header'><span uk-icon='cog'></span> Settings</li>
+      <li><a href='/admin/show-admins'>Configure Admins</a></li>
     </ul>
   </div>
 </html>

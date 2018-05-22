@@ -228,7 +228,23 @@ class AdminController extends Controller
       return redirect('/admin/delete-users')->with('info', $count . ' users deleted.');
     }
 
+    public function showAdmins() {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
 
+      $admins = DB::table('admins')->orderBy('lastname')->get();
+
+      return view('showAdmins')->with('admins', $admins);
+    }
+
+    public function adminAdd(Request $request) {}
+
+    public function adminDelete(Request $request) {}
+
+    public function adminModify(Request $request) {}
 
 
     /////////////////////////////////////////////////////
