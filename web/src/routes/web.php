@@ -21,3 +21,7 @@ Route::post('/admin/add-user', 'AdminController@userAdd');
 Route::get('/admin/list-users', 'AdminController@showUserList');
 Route::get('/admin/delete-users', 'AdminController@showUserDelete');
 Route::post('/admin/delete-users', 'AdminController@userDelete');
+Route::get('/admin/show-admins', 'AdminController@showAdmins');
+Route::post('/admin/add-admin', 'AdminController@adminAdd');
+Route::post('/admin/modify-admin', 'AdminController@adminModify');
+Route::get('/admin/delete-admin', 'AdminController@adminDelete');
