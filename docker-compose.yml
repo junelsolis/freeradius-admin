@@ -3,7 +3,7 @@ version: "3.2"
 services:
 
  radius:
-  container_name: rad-server
+  container_name: fradmin-rad
   build: ./freeradius
   ports:
    - "1812:1812"
@@ -16,7 +16,7 @@ services:
   tty: true
 
  mysql:
-  container_name: mysql-server
+  container_name: fradmin-mysql
   build: ./mysql
   ports:
    - "3306:3306"
@@ -25,7 +25,6 @@ services:
    - ./mysql/srv/initdb.d:/docker-entrypoint-initdb.d
    - ./mysql/srv/data:/var/lib/mysql
   environment:
-    MYSQL_USER: root
     MYSQL_ROOT_PASSWORD: password
   networks:
    radnet:
@@ -33,7 +32,7 @@ services:
   tty: true
 
  apache:
-  container_name: apache2-server
+  container_name: fradmin-web
   build: ./web
   ports:
    - "80:80/tcp"
@@ -47,7 +46,7 @@ services:
   tty: true
 
  phpmyadmin:
-  container_name: phpmyadmin
+  container_name: fradmin-pma
   build: ./phpmyadmin
   ports:
    - "8080:80"
