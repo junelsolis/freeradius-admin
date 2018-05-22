@@ -1,4 +1,4 @@
-server vlan4 {
+server server01 {
 listen {
 	ipaddr = *
 	type = auth
@@ -23,9 +23,10 @@ authorize {
 	preprocess
 	sql
 
-	if (SQL-Group != "staff" && SQL-Group != "staffkids" && SQL-Group != "guests") {
-		reject
-	}
+	# Uncomment the next three lines if you want to use SQL group checking
+	#if (SQL-Group != "" && SQL-Group != "" && SQL-Group != "") {
+	#	reject
+	#}
 	expiration
 	logintime
 	pap
@@ -45,9 +46,6 @@ preacct {
 	suffix
 }
 
-#
-#  Accounting.  Log the accounting data.
-#
 accounting {
 	#detail
 	unix
@@ -71,8 +69,7 @@ post-auth {
 	}
 }
 
-pre-proxy {
-}
+
 post-proxy {
 	eap
 }
