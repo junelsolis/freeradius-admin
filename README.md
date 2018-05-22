@@ -3,6 +3,7 @@
 A web interface for FreeRADIUS with a MySQL backend.
 
 
+![FreeRADIUS Admin](scr2.png)
 
 # Try the Demo Site
 [https://freeradiusadmin-demo.junelsolis.com](http://freeradiusadmin-demo.junelsolis.com)\
