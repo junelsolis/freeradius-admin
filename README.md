@@ -39,11 +39,12 @@ For a production setup, modify the **.env** file located in *./web/src* and make
 # Production Setups
 1. The folder *./mysql/src/data* must be emptied to prevent any conflicts with database passwords.
 2. Edit [docker-compose.yml](docker-compose.yml). Change the ```MYSQL_ROOT_PASSWORD``` entry to your own password.
-3. Edit [.env](./web/src/.env). Change the database settings to match the above.
-4. Set web server volume permissions: ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
+3. Edit [./web/src/.env](./web/src/.env) by changing the database settings to match the above.
+4. Build the images by running ```docker-compose build``` at the project root.
+5. Run ```docker-compose up -d``` to run the services in the background.
+6. Confirm the services are up ```docker container ps```.
+7. Set web server volume permissions: ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
 
-# Manual Installation
-In order to use this software, I assume that you already have a FreeRADIUS 3 server set up properly to interface with a MySQL database containing the default FreeRADIUS schema. This project was constructed with the default MySQL schema that comes with FreeRADIUS in mind. If you wish to use this project with a different schema, you will have to change the tables the source code points to.
 
 # How to Contribute
 Contributors are welcome. Fork the project and create a pull request. Please have a look at [CONTRIBUTING.md](CONTRIBUTING.md) for some guidelines.
