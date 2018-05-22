@@ -13,7 +13,7 @@ The simplest way to install this app is using Docker.
 
 1. Clone this repository
 2. Use the **docker-compose.yml** file to build and run the containers.
-3. Run this command in your container host: 
+3. Run this command in your container host:
 ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
 4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
@@ -44,6 +44,7 @@ For a production setup, modify the **.env** file located in *./web/src* and make
 5. Run ```docker-compose up -d``` to run the services in the background.
 6. Confirm the services are up ```docker container ps```.
 7. Set web server volume permissions: ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
+8. Optionally, run [./generate-le.sh](generate-le.sh) to generate a LetsEncrypt SSL certificate.
 
 
 # How to Contribute
