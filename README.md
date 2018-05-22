@@ -8,7 +8,7 @@ Need a **FreeRADIUS + MySQL + web GUI** installation right away? This applicatio
 [https://freeradiusadmin-demo.junelsolis.com](http://freeradiusadmin-demo.junelsolis.com)\
 Login credentials: **testadmin**, **password**
 
-# Install with Docker
+# Install with Docker for Testing
 The simplest way to install this app is using Docker.
 
 1. Clone this repository
@@ -17,6 +17,18 @@ The simplest way to install this app is using Docker.
 ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
 4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
+
+# Production Setups
+1. The folder *./mysql/src/data* must be emptied to prevent any conflicts with database passwords.
+2. Edit [docker-compose.yml](docker-compose.yml). Change the ```MYSQL_ROOT_PASSWORD``` entry to your own password.
+3. Edit [./web/src/.env](./web/src/.env) by changing the database settings to match the above.
+4. **IMPORTANT** Navigate to the *./web/src* directory and run the following code ```php artisan key:generate``` in order to generate an app key.
+5. Edit [./web/conf/sites-enabled/000-default.conf](.web/conf/sites-enabled/000-default.conf) as needed in your configuration.
+5. Build the images by running ```docker-compose build``` at the project root.
+6. Run ```docker-compose up -d``` to run the services in the background.
+7. Confirm the services are up ```docker container ps```.
+8. Set web server volume permissions: ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
+9. Optionally, run [./generate-le.sh](generate-le.sh) to generate a LetsEncrypt SSL certificate.
 
 **Notes about docker configuration:**
 
@@ -36,15 +48,7 @@ The FreeRADIUS 3 server is the service around which the rest of the services in 
 
 For a production setup, modify the **.env** file located in *./web/src* and make sure **you change the app key**. You can do so by going to a terminal, navigating to the *./web/src* directory, and running ```php artisan key:generate```.
 
-# Production Setups
-1. The folder *./mysql/src/data* must be emptied to prevent any conflicts with database passwords.
-2. Edit [docker-compose.yml](docker-compose.yml). Change the ```MYSQL_ROOT_PASSWORD``` entry to your own password.
-3. Edit [./web/src/.env](./web/src/.env) by changing the database settings to match the above.
-4. Build the images by running ```docker-compose build``` at the project root.
-5. Run ```docker-compose up -d``` to run the services in the background.
-6. Confirm the services are up ```docker container ps```.
-7. Set web server volume permissions: ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
-8. Optionally, run [./generate-le.sh](generate-le.sh) to generate a LetsEncrypt SSL certificate.
+
 
 
 # How to Contribute
