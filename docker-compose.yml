@@ -25,8 +25,7 @@ services:
    - ./mysql/srv/initdb.d:/docker-entrypoint-initdb.d
    - ./mysql/srv/data:/var/lib/mysql
   environment:
-    MYSQL_USER: root
-    MYSQL_ROOT_PASSWORD: L1u4ju1BWnh
+    MYSQL_ROOT_PASSWORD: password
   networks:
    radnet:
     ipv4_address: 172.100.0.101
@@ -46,19 +45,19 @@ services:
     ipv4_address: 172.100.0.102
   tty: true
 
- # phpmyadmin:
- #  container_name: phpmyadmin
- #  build: ./phpmyadmin
- #  ports:
- #   - "8080:80"
- #  environment:
- #    PMA_HOST: 172.100.0.101
- #    PMA_USER: root
- #    PMA_PASSWORD: password
- #  networks:
- #    radnet:
- #      ipv4_address: 172.100.0.103
- #  tty: true
+ phpmyadmin:
+  container_name: phpmyadmin
+  build: ./phpmyadmin
+  ports:
+   - "8080:80"
+  environment:
+    PMA_HOST: 172.100.0.101
+    PMA_USER: root
+    PMA_PASSWORD: password
+  networks:
+    radnet:
+      ipv4_address: 172.100.0.103
+  tty: true
 
 networks:
  radnet:
