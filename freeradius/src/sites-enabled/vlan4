@@ -1,8 +1,8 @@
-server server01 {
+server vlan4 {
 listen {
 	ipaddr = *
 	type = auth
-	port = 0
+	port = 1814
 	limit {
 	      max_connections = 16
 	      lifetime = 0
@@ -11,7 +11,7 @@ listen {
 }
 listen {
 	ipaddr = *
-	port = 0
+	port = 1815
 	type = acct
 
 	limit {
@@ -22,9 +22,10 @@ authorize {
 	filter_username
 	preprocess
 	sql
-	#if (SQL-Group != "" && SQL-Group != "") {
-	#	reject
-	#}
+
+	if (SQL-Group != "staff" && SQL-Group != "staffkids" && SQL-Group != "guests") {
+		reject
+	}
 	expiration
 	logintime
 	pap
@@ -35,6 +36,7 @@ authenticate {
 	Auth-Type PAP {
 		pap
 	}
+	eap
 }
 
 preacct {
@@ -43,6 +45,9 @@ preacct {
 	suffix
 }
 
+#
+#  Accounting.  Log the accounting data.
+#
 accounting {
 	#detail
 	unix
@@ -55,7 +60,6 @@ session {
 	sql
 }
 post-auth {
-
 	update {
 		&reply: += &session-state:
 	}
