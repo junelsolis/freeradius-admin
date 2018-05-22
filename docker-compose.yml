@@ -40,6 +40,7 @@ services:
    - "443:443"
   volumes:
    - "./web/src:/var/www/html"
+   - ".le:/etc/letsencrypt"
   networks:
    radnet:
     ipv4_address: 172.100.0.102
