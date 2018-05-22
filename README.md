@@ -5,7 +5,7 @@ A web interface for FreeRADIUS with a MySQL backend.
 Need a **FreeRADIUS + MySQL + web GUI** installation right away? This application simplifies managing RADIUS users and groups through a web-based GUI. It is built around Docker containers in order to help take the complexity of installing and configuring FreeRADIUS, MySQL, and Apache at the same time. Place it all on one machine, turn the key and it's up.
 
 # Try the Demo Site
-[http://freeradiusadmin-demo.junelsolis.com](http://freeradiusadmin-demo.junelsolis.com)\
+[https://freeradiusadmin-demo.junelsolis.com](http://freeradiusadmin-demo.junelsolis.com)\
 Login credentials: **testadmin**, **password**
 
 # Install with Docker
