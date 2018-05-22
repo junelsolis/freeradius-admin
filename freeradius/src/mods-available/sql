@@ -19,25 +19,18 @@
 
 sql {
 	# The sub-module to use to execute queries. This should match
-	# the database you're attempting to connect to.
-	#
-	#    * rlm_sql_mysql
-	#    * rlm_sql_mssql
-	#    * rlm_sql_oracle
-	#    * rlm_sql_postgresql
-	#    * rlm_sql_sqlite
-	#    * rlm_sql_null (log queries to disk)
-	#
+	# the database youre attempting to connect to.
+
 	driver = "rlm_sql_mysql"
 
 	dialect = "mysql"
 
 	# Connection info:
 	#
-	server = "mysql-server"
+	server = "fradmin_mysql"
 	port = 3306
 	login = "root"
-	password = "password"
+	password = "L1u4ju1#BWnh"
 
 	# Database table configuration for everything except Oracle
 	radius_db = "radius"
@@ -84,13 +77,6 @@ sql {
 	# Remove stale session if checkrad does not see a double login
 	delete_stale_sessions = yes
 
-	# Write SQL queries to a logfile. This is potentially useful for tracing
-	# issues with authorization queries.  See also "logfile" directives in
-	# mods-config/sql/main/*/queries.conf.  You can enable per-section logging
-	# by enabling "logfile" there, or global logging by enabling "logfile" here.
-	#
-	# Per-section logging can be disabled by setting "logfile = ''"
-#	logfile = ${logdir}/sqllog.sql
 
 	#  Set the maximum query duration and connection timeout
 	#  for rlm_sql_mysql.
