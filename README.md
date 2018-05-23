@@ -19,7 +19,7 @@ The simplest way to install this app is using Docker.
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
 4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
 
-![FreeRADIUS Admin](scr3.png)
+![FreeRADIUS Admin](src3.png)
 # Production Setups
 1. The folder *./mysql/src/data* must be emptied to prevent any conflicts with database passwords.
 2. Edit [docker-compose.yml](docker-compose.yml). Change the ```MYSQL_ROOT_PASSWORD``` entry to your own password.
