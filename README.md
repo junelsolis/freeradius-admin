@@ -29,7 +29,7 @@ The simplest way to install this app is using Docker.
 6. Run ```docker-compose up -d``` to run the services in the background.
 7. Confirm the services are up ```docker container ps```.
 8. Set web server volume permissions: ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
-9. Optionally, run [./generate-le.sh](generate-le.sh) to generate a LetsEncrypt SSL certificate.
+9. **OPTIONAL:** Make *./generate-le.sh* executable ```chmod u+x generate-le.sh``` then run ```.generate-le.sh``` to generate a LetsEncrypt SSL certificate using the manual DNS method.
 
 **Notes about docker configuration:**
 
