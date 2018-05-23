@@ -37,7 +37,7 @@
             <input class='uk-input' type="password" placeholder="Password" name="password" required />
           </div>
           <div class="uk-margin">
-            <button class="uk-button uk-button-primary uk-width-1-1">Login</button>
+            <button id='login-button' class="uk-button uk-button-primary uk-width-1-1">Login</button>
           </div>
         </fieldset>
       </form>
