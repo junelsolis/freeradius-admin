@@ -30,9 +30,9 @@
 
 
       <div id='content' class='uk-width-3-5@s'>
-        <h2 class='uk-heading-line uk-text-center'><span><strong>Add User</strong></span></h2>
+        <h2 class='uk-heading-line uk-text-center'><span><strong>Users</strong></span></h2>
 
-        <form class='uk-form-stacked uk-child-width-1-2@s uk-margin uk-grid' action='/admin/add-user' method='post' uk-grid>
+        <form class='uk-form uk-child-width-1-2@s uk-margin uk-grid' action='/admin/add-user' method='post' uk-grid>
           {{ csrf_field() }}
 
           @if (session('error'))
@@ -54,27 +54,21 @@
           @endif
 
           <div>
-            <label class='uk-form-label'>Username</label>
             <input class='uk-input' name='username' type='text' required placeholder='Username' />
           </div>
           <div>
           </div>
           <div>
-            <label class='uk-form-label'>First Name</label>
             <input class='uk-input' name='firstname' type='text' required placeholder='First Name' />
           </div>
           <div>
-
-            <label class='uk-form-label'>Last Name</label>
             <input class='uk-input' name='lastname' type='text' required placeholder='Last Name' />
           </div>
           <div>
-            <label class='uk-form-label'>Password</label>
-            <input class='uk-input' name='password' type='password' required placeholder="Enter a password" />
+            <input class='uk-input' name='password' type='password' required placeholder="Enter password" />
           </div>
           <div>
-            <label class='uk-form-label'>Confirm Password</label>
-            <input class='uk-input' name='confirmPassword' type='password' required placeholder='Enter the password again to confirm.' />
+            <input class='uk-input' name='confirmPassword' type='password' required placeholder='Enter the password again' />
           </div>
           <div>
             <label class='uk-form-label'>Select Group</label>
