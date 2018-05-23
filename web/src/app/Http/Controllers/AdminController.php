@@ -369,6 +369,88 @@ class AdminController extends Controller
 
     }
 
+    public function showGroups() {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $groups = DB::table('groups')->orderBy('groupname')->get();
+
+      return view('groups')->with('groups', $groups);
+    }
+
+    public function groupModify(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $request->validate([
+        'id' => 'int|required',
+        'groupname' => 'string',
+        'description' => 'string',
+      ]);
+
+      $id = $request['id'];
+      $groupname = $request['groupname'];
+      $description = $request['description'];
+
+      if (empty($id)) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      // sanitize string lengths
+      if (strlen($groupname) > 20) {
+        return back()->with('error', 'Group name cannot be longer than 20 characters.');
+      }
+
+      if (strlen($description) > 50) {
+        return back()->with('error', 'Group description cannot be longer than 50 characters.');
+      }
+
+
+
+      if (empty($groupname)) {
+
+      } else {
+        DB::table('groups')->where('id', $id)
+          ->update([
+            'groupname', $groupname
+          ]);
+      }
+
+      if (empty($description)) {}
+      else {
+        DB::table('groups')->where('id', $id)
+          ->update([
+            'description', $groupname
+          ]);
+      }
+    }
+
+    public function groupDelete(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $id = $request['id'];
+
+      if (empty($id)) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      DB::table('groups')->where('id', $id)->delete();
+
+      return redirect('/admin/groups')->with('info', 'Group deleted.');
+    }
+
 
     /////////////////////////////////////////////////////
     /////////////////////////////////////////////////////
