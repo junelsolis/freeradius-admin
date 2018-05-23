@@ -240,11 +240,134 @@ class AdminController extends Controller
       return view('showAdmins')->with('admins', $admins);
     }
 
-    public function adminAdd(Request $request) {}
+    public function adminAdd(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
 
-    public function adminDelete(Request $request) {}
+      $username = $request['username'];
+      $firstname = ucwords($request['firstname']);
+      $lastname = ucwords($request['lastname']);
+      $password = $request['password'];
+      $confirmPassword = $request['confirmPassword'];
 
-    public function adminModify(Request $request) {}
+      $admins = DB::table('admins')->orderBy('lastname')->get();
+
+      // check that username does not already exist
+      $exists = $admins->where('username', $username)->first();
+      if (empty($exists) == false) {
+        return back()->with('error', 'Username already exists.');
+      }
+
+      // check that name does not already exist
+      $fnameExists = $admins->where('firstname', $firstname)->first();
+      $lnameExists = $admins->where('lastname', $lastname)->first();
+
+      if (empty($fnameExists) == false && empty($lnameExists) == false) {
+        return back()->with('error', 'Administrator already exists.');
+      }
+
+      // check passwords are the same
+      if ($password != $confirmPassword) {
+        return back()->with('error', 'The passwords do not match. Please try again.');
+      }
+
+      // enforce password rules
+      $checkPassword = $this->checkPassword($password, $confirmPassword, $firstname, $lastname);
+      if ($checkPassword !== true) {
+        return back()->with('error', $checkPassword);
+      }
+
+      // encode password
+      $password = sha1($password);
+
+      // enter into database
+      DB::table('admins')->insert([
+        'username' => $username,
+        'firstname' => $firstname,
+        'lastname' => $lastname,
+        'password' => $password
+      ]);
+
+      // return to admins view
+      return redirect('/admin/show-admins')
+        ->with('info', 'Successfully added administrator.');
+
+    }
+
+    public function adminDelete(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $request->validate([
+        'id' => 'int|required'
+      ]);
+
+      $id = $request['id'];
+
+      // delete from db
+      DB::table('admins')
+        ->where('id', $id)
+        ->delete();
+
+      return redirect('/admin/show-admins')->with('info', 'Administrator deleted.');
+    }
+
+    public function adminModify(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $id = $request['id'];
+      $password = $request['currentPassword'];
+      $newPassword = $request['newPassword'];
+      $confirmPassword = $request['confirmPassword'];
+
+      // get admin object
+      $admin = DB::table('admins')->where('id', $id)->first();
+
+      if (empty($admin)) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      // check that current password is correct
+      if (sha1($password) != $admin->password) {
+        return back()->with('error', 'Incorrect password.');
+      }
+
+      // check that new passwords match
+      if ($newPassword != $confirmPassword) {
+        return back()->with('error', 'New passwords do not match.');
+      }
+
+      // enforce password rules
+      $checkPassword = $this->checkPassword($newPassword, $confirmPassword, $admin->firstname, $admin->lastname);
+
+      if ($checkPassword !== true) {
+        return back()->with('error', $checkPassword);
+      }
+
+      // encode new password
+      $newPassword = sha1($newPassword);
+
+      // modify db
+      DB::table('admins')->where('id', $id)
+        ->update([
+          'password' => $newPassword
+        ]);
+
+      // return to view
+      return redirect('/admin/show-admins')->with('info', 'Administrator was modified.');
+
+    }
 
 
     /////////////////////////////////////////////////////

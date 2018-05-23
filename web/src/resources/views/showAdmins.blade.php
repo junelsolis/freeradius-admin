@@ -34,6 +34,25 @@
       <div id='content' class='uk-width-3-5@s'>
         <h2 class='uk-heading-line uk-text-center uk-margin-large-bottom'><span><strong>Administrators</strong></span></h2>
 
+        @if (session('info'))
+        <div class='uk-alert-success' uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>
+            {{ session('info') }}
+          </p>
+        </div>
+        @endif
+
+        @if (session('error'))
+        <div class='uk-alert-danger' uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>
+            {{ session('error') }}
+          </p>
+        </div>
+        @endif
+
+
         @if ($admins)
         <ul uk-accordion='collapsible: false' class='uk-margin-large-bottom'>
           @foreach ($admins as $admin)
@@ -42,7 +61,7 @@
             <div class='uk-accordion-content'>
               <div class='uk-grid-collapse uk-child-width-1-2@s' uk-grid>
                 <div>
-                  <form action='post' method='/admin/modify-admin'>
+                  <form action='/admin/modify-admin' method='post'>
                     {{ csrf_field() }}
                     <input type='hidden' name='id' value='{{ $admin->id }}' />
                     <div class='uk-grid-small uk-child-width-1-2' uk-grid>
