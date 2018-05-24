@@ -27,10 +27,10 @@ sql {
 
 	# Connection info:
 	#
-	server = "fradmin_mysql"
+	server = "fradmin-mysql"
 	port = 3306
 	login = "root"
-	password = "L1u4ju1#BWnh"
+	password = "password"
 
 	# Database table configuration for everything except Oracle
 	radius_db = "radius"
