@@ -1,3 +1,4 @@
 FROM ubuntu
 
-RUN apt update && apt upgrade -y && apt install freeradius freeradius-mysql -y && apt autoclean
+RUN apt-get update && apt-get upgrade -y && apt-get install freeradius freeradius-common freeradius-dhcp freeradius-mysql freeradius-utils -y
+# CMD service freeradius start
