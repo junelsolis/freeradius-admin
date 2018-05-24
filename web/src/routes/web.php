@@ -25,3 +25,5 @@ Route::get('/admin/show-admins', 'AdminController@showAdmins');
 Route::post('/admin/add-admin', 'AdminController@adminAdd');
 Route::post('/admin/modify-admin', 'AdminController@adminModify');
 Route::get('/admin/delete-admin', 'AdminController@adminDelete');
+
+Route::get('/admin/groups', 'AdminController@showGroups');
