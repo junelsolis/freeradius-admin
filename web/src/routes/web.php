@@ -16,7 +16,7 @@ Route::post('/', 'LoginController@login');
 Route::get('/admin', 'AdminController@showDashboard');
 Route::get('/admin/logout', 'AdminController@logout');
 
-Route::get('/admin/add-user', 'AdminController@showUserAdd');
+Route::get('/admin/users', 'AdminController@showUsers');
 Route::post('/admin/add-user', 'AdminController@userAdd');
 Route::get('/admin/list-users', 'AdminController@showUserList');
 Route::get('/admin/delete-users', 'AdminController@showUserDelete');
