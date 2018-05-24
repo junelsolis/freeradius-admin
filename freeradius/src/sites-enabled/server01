@@ -1,8 +1,8 @@
 server server01 {
 listen {
-	ipaddr = *
+	ipaddr = 172.100.0.100
 	type = auth
-	port = 1814
+	port = 1812
 	limit {
 	      max_connections = 16
 	      lifetime = 0
@@ -10,8 +10,8 @@ listen {
 	}
 }
 listen {
-	ipaddr = *
-	port = 1815
+	ipaddr = 172.100.0.100
+	port = 1813
 	type = acct
 
 	limit {
@@ -20,6 +20,7 @@ listen {
 
 authorize {
 	filter_username
+	suffix
 	preprocess
 	sql
 
@@ -37,7 +38,6 @@ authenticate {
 	Auth-Type PAP {
 		pap
 	}
-	eap
 }
 
 preacct {
@@ -71,6 +71,5 @@ post-auth {
 
 
 post-proxy {
-	eap
 }
 }
