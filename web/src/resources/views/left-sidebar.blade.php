@@ -9,7 +9,7 @@
       <li class='uk-nav-divider'></li>
 
       <li class='uk-nav-header'><span uk-icon="users"></span> Groups</li>
-      <li><a href='#'>Add Group</a></li>
+      <li><a href='/admin/groups#add'>Add Group</a></li>
       <li><a href="#">List All</a></li>
       <li class='uk-nav-divider'></li>
 

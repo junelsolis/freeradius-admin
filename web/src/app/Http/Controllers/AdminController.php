@@ -391,7 +391,7 @@ class AdminController extends Controller
         return redirect('/');
       }
 
-      $groups = DB::table('groups')->orderBy('groupname')->get();
+      $groups = DB::table('groups')->orderBy('name')->get();
 
       return view('groups')->with('groups', $groups);
     }
