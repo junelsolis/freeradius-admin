@@ -27,3 +27,5 @@ Route::post('/admin/modify-admin', 'AdminController@adminModify');
 Route::get('/admin/delete-admin', 'AdminController@adminDelete');
 
 Route::get('/admin/groups', 'AdminController@showGroups');
+Route::post('/admin/add-group', 'AdminController@groupAdd');
+Route::get('/admin/delete-group', 'AdminController@groupDelete');
