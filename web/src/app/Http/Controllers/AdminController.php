@@ -81,6 +81,22 @@ class AdminController extends Controller
       return redirect('/admin')->with('msg', 'Your password has been changed.');
     }
 
+    public function showUsers() {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $users = DB::table('users')->orderBy('lastname')->get();
+      $users = $this->getUsers($users);
+
+      $groups = DB::table('groups')->orderby('name')->get();
+
+      return view('users')
+        ->with('users', $users)
+        ->with('groups', $groups);
+    }
     public function showUserAdd() {
       $check = $this->checkLoggedIn();
       if ($check == false) {
@@ -186,7 +202,6 @@ class AdminController extends Controller
         return redirect('/');
       }
 
-      // get all users
       $users = DB::table('users')->orderBy('lastname')->get();
       $users = $this->getUsers($users);
 

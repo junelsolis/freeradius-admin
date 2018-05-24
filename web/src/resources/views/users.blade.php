@@ -11,6 +11,7 @@
   <script src="{{ asset('js/uikit-icons.min.js') }}"></script>
 
   <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/users.css') }}" />
   <title>FreeRADIUS Admin</title>
 </head>
 <body>
@@ -30,9 +31,11 @@
 
 
       <div id='content' class='uk-width-3-5@s'>
-        <h2 class='uk-heading-line uk-text-center'><span><strong>Add User</strong></span></h2>
+        <h2 class='uk-heading-line'><span><strong>User Management</strong></span></h2>
 
-        <form class='uk-form-stacked uk-child-width-1-2@s uk-margin uk-grid' action='/admin/add-user' method='post' uk-grid>
+        <h3 class='uk-heading-line uk-text-right subheading' id='add-user'><span>Add New User</span></h2>
+
+        <form class='uk-form-stacked uk-child-width-1-2@s uk-grid-small' action='/admin/add-user' method='post' uk-grid>
           {{ csrf_field() }}
 
           @if (session('error'))
@@ -54,30 +57,24 @@
           @endif
 
           <div>
-            <label class='uk-form-label'>Username</label>
             <input class='uk-input' name='username' type='text' required placeholder='Username' />
           </div>
           <div>
           </div>
           <div>
-            <label class='uk-form-label'>First Name</label>
             <input class='uk-input' name='firstname' type='text' required placeholder='First Name' />
           </div>
           <div>
-
-            <label class='uk-form-label'>Last Name</label>
             <input class='uk-input' name='lastname' type='text' required placeholder='Last Name' />
           </div>
           <div>
-            <label class='uk-form-label'>Password</label>
-            <input class='uk-input' name='password' type='password' required placeholder="Enter a password" />
+            <input class='uk-input' name='password' type='password' required placeholder="Enter password" />
           </div>
           <div>
-            <label class='uk-form-label'>Confirm Password</label>
-            <input class='uk-input' name='confirmPassword' type='password' required placeholder='Enter the password again to confirm.' />
+            <input class='uk-input' name='confirmPassword' type='password' required placeholder='Enter password again' />
           </div>
           <div>
-            <label class='uk-form-label'>Select Group</label>
+            <label class='uk-form-label'>Group</label>
             <select class='uk-select' name='group'>
               <option disabled>Select Group</option>
               @foreach ($groups as $group)
@@ -87,7 +84,7 @@
           </div>
           <div>
             <label class='uk-form-label'>Allowed Logins</label>
-            <input class='uk-input' name='logins' type='number' required />
+            <input class='uk-input' name='logins' type='number' value='1' required />
           </div>
           <div class='uk-width-1-1@s'>
             <button class='uk-button uk-button-primary' type='submit'>Add User</button>
