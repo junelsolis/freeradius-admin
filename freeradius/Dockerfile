@@ -1,3 +1,3 @@
-FROM alpine
+FROM ubuntu
 
-RUN apk update; apk upgrade
+RUN apt update && apt upgrade -y && apt install freeradius -y && apt autoclean

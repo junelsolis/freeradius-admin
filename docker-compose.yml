@@ -9,7 +9,7 @@ services:
      - "1812:1812"
      - "1813:1813"
     volumes:
-     - "./freeradius/src:/etc/raddb"
+     - "./freeradius/src:/etc/freeradius"
     networks:
      radnet:
       ipv4_address: 172.100.0.100
