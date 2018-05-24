@@ -192,56 +192,9 @@ class AdminController extends Controller
         'value' => $logins
       ]);
 
-      return redirect('/admin/add-user')->with('info', 'User added to database.');
+      return redirect('/admin/users')->with('info', 'User added to database.');
     }
 
-    public function showUserList() {
-      $check = $this->checkLoggedIn();
-      if ($check == false) {
-        session()->flush();
-        return redirect('/');
-      }
-
-      $users = DB::table('users')->orderBy('lastname')->get();
-      $users = $this->getUsers($users);
-
-      return view('userList')
-        ->with('users', $users);
-
-    }
-
-    public function showUserDelete() {
-      $check = $this->checkLoggedIn();
-      if ($check == false) {
-        session()->flush();
-        return redirect('/');
-      }
-
-      // get users
-      $users = DB::table('users')->orderBy('lastname')->get();
-      $users = $this->getUsers($users);
-
-      return view('userDelete')
-        ->with('users', $users);
-    }
-
-    public function userDelete(Request $request) {
-      $check = $this->checkLoggedIn();
-      if ($check == false) {
-        session()->flush();
-        return redirect('/');
-      }
-
-      $ids = $request['ids'];
-
-      if (empty($ids)) {
-          return back()->with('error', 'No users selected for deletion.');
-      }
-
-      $count = $this->deleteUsers($ids);
-
-      return redirect('/admin/delete-users')->with('info', $count . ' users deleted.');
-    }
 
     public function showAdmins() {
       $check = $this->checkLoggedIn();
@@ -393,7 +346,45 @@ class AdminController extends Controller
 
       $groups = DB::table('groups')->orderBy('name')->get();
 
+      foreach ($groups as $group) {
+        $users = $this->getUsersInGroup($group);
+        $group->usersInGroup = count($users);
+      }
+
       return view('groups')->with('groups', $groups);
+    }
+
+    public function groupAdd(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $request->validate([
+        'name' => 'string|required',
+        'description' => 'string|nullable'
+      ]);
+
+      $name = $request['name'];
+      $description = $request['description'];
+
+      if (strlen($name) > 30) {
+        return back()->with('error', 'Group name cannot be more than 30 characters.');
+      }
+
+      if (strlen($description) > 80) {
+        return back()->with('error', 'Description cannot be more than 80 characters.');
+      }
+
+      // insert into db
+      DB::table('groups')->insert([
+        'name' => $name,
+        'description' => $description
+      ]);
+
+      return redirect('/admin/groups')->with('info', 'Group added.');
+
     }
 
     public function groupModify(Request $request) {
@@ -459,6 +450,14 @@ class AdminController extends Controller
       if (empty($id)) {
         session()->flush();
         return redirect('/');
+      }
+
+      // check if there are any users assigned
+      $group = DB::table('groups')->where('id', $id)->first();
+      $usersInGroup = $this->getUsersInGroup($group);
+
+      if ($usersInGroup->count() > 0) {
+        return back()->with('error', 'Group has assigned users.');
       }
 
       DB::table('groups')->where('id', $id)->delete();
@@ -551,6 +550,7 @@ class AdminController extends Controller
 
       return $firstname . ' ' . $lastname;
     }
+
     private function deleteUsers($ids) {
 
       // get collection of usernames
@@ -567,5 +567,11 @@ class AdminController extends Controller
 
       return count($usernames);
 
+    }
+
+    private function getUsersInGroup($group) {
+      $users = DB::table('radusergroup')->where('groupname', $group->name)->get();
+
+      return $users;
     }
 }

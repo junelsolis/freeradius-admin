@@ -1,0 +1,11 @@
+#delete-group a {
+  color: rgb(0,77,149);
+}
+
+#delete-group a:hover {
+  color: rgb(255,191,0);
+}
+
+.subheading {
+  color: rgb(0,77,149);
+}

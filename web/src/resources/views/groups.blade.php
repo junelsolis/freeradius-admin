@@ -11,7 +11,7 @@
   <script src="{{ asset('js/uikit-icons.min.js') }}"></script>
 
   <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/admins.css') }}" />
+  <link rel="stylesheet" href="{{ asset('css/groups.css') }}" />
 
   <title>FreeRADIUS Admin</title>
 </head>
@@ -32,7 +32,7 @@
 
 
       <div id='content' class='uk-width-3-5@s'>
-        <h2 class='uk-heading-line uk-text-center uk-margin-large-bottom'><span><strong>Groups</strong></span></h2>
+        <h2 class='uk-heading-line uk-margin-large-bottom'><span><strong>Groups</strong></span></h2>
 
         @if (session('info'))
         <div class='uk-alert-success' uk-alert>
@@ -52,10 +52,52 @@
         </div>
         @endif
 
+        <div id='add-group' class='uk-margin-large-bottom'>
+          <h3 class='uk-heading-line subheading'><span>Add New Group</span></h3>
+            <form action='/admin/add-group' method='post'>
+              {{ csrf_field() }}
+              <div class='uk-grid-small' uk-grid>
+                <div class='uk-width-1-2'>
+                  <input class='uk-input' type='text' name='name' required placeholder='Group name' pattern="^[a-z][a-z-_\.]{3,30}$"/>
+                </div>
+                <div class='uk-width-1-1'>
+                  <input class='uk-input' type='text' name='description' placeholder='Group description' />
+                </div>
+                <div class='uk-width-1-2'>
+                  <button class='uk-button uk-button-primary' type='submit'>Add Group</button>
+                </div>
+              </div>
+
+            </form>
+
+        </div>
+
+        <div id='directory'>
+          <h3 class='uk-heading-line subheading'><span>Group Directory</span></h3>
+          @if ($groups)
+          <ul class='uk-list uk-list-striped'>
+            @foreach ($groups as $group)
+            <li>
+              <div id='delete-group' class='uk-grid' uk-grid>
+                <div class='uk-width-2-5'>
+                  <strong>{{ $group->name }}</strong>&nbsp;{{ $group->description }}
+                </div>
+                <div class='uk-width-2-5'>
+                  {{ $group->usersInGroup}}&nbsp;users
+                </div>
+                <div class='uk-width-1-5'>
+                  <a href='/admin/delete-group?id={{ $group->id }}'><span uk-icon="icon: trash; ratio: 1"></span></a>
+
+                </div>
+              </div>
+            </li>
+            @endforeach
+          </ul>
+          @endif
+        </div>
 
 
 
-      
       </div>
 
       @include('right-sidebar')
