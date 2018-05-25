@@ -14,6 +14,8 @@ services:
      radnet:
       ipv4_address: 172.100.0.100
     tty: true
+    entrypoint: /rad_service_start.sh
+
 
   mysql:
     container_name: fradmin-mysql
@@ -30,6 +32,7 @@ services:
      radnet:
       ipv4_address: 172.100.0.101
     tty: true
+
 
   apache:
     container_name: fradmin-web

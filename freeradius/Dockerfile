@@ -1,4 +1,6 @@
 FROM ubuntu
 
 RUN apt-get update && apt-get upgrade -y && apt-get install freeradius freeradius-common freeradius-dhcp freeradius-mysql freeradius-utils -y
-# CMD service freeradius start
+
+ADD ./rad_service_start.sh /rad_service_start.sh
+RUN ["chmod", "+x", "/rad_service_start.sh"]

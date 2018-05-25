@@ -27,7 +27,7 @@ sql {
 
 	# Connection info:
 	#
-	server = "fradmin-mysql"
+	server = "172.100.0.101"
 	port = 3306
 	login = "root"
 	password = "password"
