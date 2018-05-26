@@ -93,6 +93,8 @@ class AdminController extends Controller
 
       $groups = DB::table('groups')->orderby('name')->get();
 
+      $users = $this->collectUsersAlpha($users);
+
       return view('users')
         ->with('users', $users)
         ->with('groups', $groups);
@@ -573,5 +575,34 @@ class AdminController extends Controller
       $users = DB::table('radusergroup')->where('groupname', $group->name)->get();
 
       return $users;
+    }
+
+    private function collectUsersAlpha($users) {
+      $letters = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+
+      $collection = collect();
+
+      foreach ($letters as $letter) {
+        $userCollection = collect();
+
+        foreach ($users as $user) {
+          if (stripos($user->lastname, $letter) === 0) {
+            $userCollection->push($user);
+          }
+        }
+
+        if ($userCollection->isEmpty() === true) {
+
+        } else {
+          $object = new \stdClass();
+          $object->letter = $letter;
+          $object->users = $userCollection;
+
+          $collection->push($object);
+
+        }
+      }
+
+      return $collection;
     }
 }

@@ -33,68 +33,122 @@
       <div id='content' class='uk-width-3-5@s'>
         <h2 class='uk-heading-line'><span><strong>User Management</strong></span></h2>
 
-        <h3 class='uk-heading-line uk-text-right subheading' id='add-user'><span>Add New User</span></h2>
+        <ul uk-tab>
+          <li class="uk-active"><a href="#">Add User</a></li>
+          <li><a href="#">Directory</a></li>
+          <li class="uk-disabled"><a>Group Membershps</a></li>
+        </ul>
 
-        <form class='uk-form-stacked uk-child-width-1-2@s uk-grid-small' action='/admin/add-user' method='post' uk-grid>
-          {{ csrf_field() }}
+        <ul class="uk-switcher">
+          <li>
+            <!-- <h3 class='uk-heading-line subheading' id='add-user'><span>Add New User</span></h2> -->
 
-          @if (session('error'))
-          <div class='uk-width-1-1'>
-            <div class="uk-alert-danger" uk-alert>
-              <a class="uk-alert-close" uk-close></a>
-              <p>{{ session('error')}}</p>
-            </div>
-          </div>
-          @endif
+            <form class='uk-form-stacked uk-child-width-1-2@s uk-grid-small' action='/admin/add-user' method='post' uk-grid>
+              {{ csrf_field() }}
 
-          @if (session('info'))
-          <div class='uk-width-1-1'>
-            <div class="uk-alert-success" uk-alert>
-              <a class="uk-alert-close" uk-close></a>
-              <p>{{ session('info')}}</p>
-            </div>
-          </div>
-          @endif
+              @if (session('error'))
+              <div class='uk-width-1-1'>
+                <div class="uk-alert-danger" uk-alert>
+                  <a class="uk-alert-close" uk-close></a>
+                  <p>{{ session('error')}}</p>
+                </div>
+              </div>
+              @endif
 
-          <div>
-            <input class='uk-input' name='username' type='text' required placeholder='Username' />
-          </div>
-          <div>
-          </div>
-          <div>
-            <input class='uk-input' name='firstname' type='text' required placeholder='First Name' />
-          </div>
-          <div>
-            <input class='uk-input' name='lastname' type='text' required placeholder='Last Name' />
-          </div>
-          <div>
-            <input class='uk-input' name='password' type='password' required placeholder="Enter password" />
-          </div>
-          <div>
-            <input class='uk-input' name='confirmPassword' type='password' required placeholder='Enter password again' />
-          </div>
-          <div>
-            <label class='uk-form-label'>Group</label>
-            <select class='uk-select' name='group'>
-              <option disabled>Select Group</option>
-              @foreach ($groups as $group)
-              <option value="{{ $group->id }}">{{ $group->name }}</option>
+              @if (session('info'))
+              <div class='uk-width-1-1'>
+                <div class="uk-alert-success" uk-alert>
+                  <a class="uk-alert-close" uk-close></a>
+                  <p>{{ session('info')}}</p>
+                </div>
+              </div>
+              @endif
+
+              <div>
+                <input class='uk-input' name='username' type='text' required placeholder='Username' />
+              </div>
+              <div>
+              </div>
+              <div>
+                <input class='uk-input' name='firstname' type='text' required placeholder='First Name' />
+              </div>
+              <div>
+                <input class='uk-input' name='lastname' type='text' required placeholder='Last Name' />
+              </div>
+              <div>
+                <input class='uk-input' name='password' type='password' required placeholder="Enter password" />
+              </div>
+              <div>
+                <input class='uk-input' name='confirmPassword' type='password' required placeholder='Enter password again' />
+              </div>
+              <div>
+                <label class='uk-form-label'>Group</label>
+                <select class='uk-select' name='group'>
+                  <option disabled>Select Group</option>
+                  @foreach ($groups as $group)
+                  <option value="{{ $group->id }}">{{ $group->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div>
+                <label class='uk-form-label'>Allowed Logins</label>
+                <input class='uk-input' name='logins' type='number' value='1' required />
+              </div>
+              <div class='uk-width-1-1@s'>
+                <button class='uk-button uk-button-primary' type='submit'>Add User</button>
+              </div>
+            </form>
+          </li>
+          <li>
+            <!-- <h3 class='uk-heading-line subheading' id='directory'><span>Directory</span></h2> -->
+            @if ($users)
+            <ul uk-tab>
+              @foreach ($users as $item)
+              <li><a href="#">{{ $item->letter }}</a></li>
               @endforeach
-            </select>
-          </div>
-          <div>
-            <label class='uk-form-label'>Allowed Logins</label>
-            <input class='uk-input' name='logins' type='number' value='1' required />
-          </div>
-          <div class='uk-width-1-1@s'>
-            <button class='uk-button uk-button-primary' type='submit'>Add User</button>
-          </div>
-        </form>
+            </ul>
+            <ul class="uk-switcher uk-margin">
+              @foreach ($users as $item)
+              <ul uk-accordion>
+                @foreach ($item->users as $user)
+                <li>
+                  <a class="uk-accordion-title" href="#">{{ $user->fullname }}</a>
+                  <div class="uk-accordion-content">
+                      <div class='uk-width-1-2'>
+                        <form class='uk-form-stacked uk-grid-small uk-child-width-1-2@s' uk-grid method='post' action='/admin/change-user-password'>
+                          {{ csrf_field() }}
+                          <div>
+                            <input class='uk-input' name='password' type='password' required placeholder='Enter password'/>
+                          </div>
+                          <div>
+                            <input class='uk-input' name='confirmPassword' type='password' required placeholder='Confirm password' />
+                          </div>
+                          <div class='uk-width-1-1'>
+                            <button class='uk-button uk-button-primary uk-width-1-1' type='submit'>Change Password</button>
+                          </div>
+                        </form>
+                      </div>
+                  </div>
+                </li>
+                @endforeach
+              </ul>
+              @endforeach
+            </ul>
+            @endif
+          </li>
+        </ul>
+
+
+
+
+
+
+
+
       </div>
 
 
       @include('right-sidebar')
-
 
     </div>
   </div>
