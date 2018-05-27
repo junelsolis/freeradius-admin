@@ -36,7 +36,7 @@
         <ul uk-tab>
           <li class="uk-active"><a href="#">Add User</a></li>
           <li><a href="#">Directory</a></li>
-          <li class="uk-disabled"><a>Group Membershps</a></li>
+          <li class="uk-disabled"><a>List All</a></li>
         </ul>
 
         <ul class="uk-switcher">
@@ -65,7 +65,7 @@
               @endif
 
               <div>
-                <input class='uk-input' name='username' type='text' required placeholder='Username' />
+                <input class='uk-input' name='username' type='text' required placeholder='Username' pattern="^[a-z][a-z-_\.]{3,30}$"/>
               </div>
               <div>
               </div>
@@ -99,7 +99,7 @@
               </div>
             </form>
           </li>
-          <li>
+          <li id='list-user'>
             <!-- <h3 class='uk-heading-line subheading' id='directory'><span>Directory</span></h2> -->
             @if ($users)
             <ul uk-tab>
@@ -107,27 +107,19 @@
               <li><a href="#">{{ $item->letter }}</a></li>
               @endforeach
             </ul>
-            <ul class="uk-switcher uk-margin">
+            <ul class='uk-switcher'>
               @foreach ($users as $item)
-              <ul uk-accordion>
+              <ul class='uk-list uk-list-striped'>
                 @foreach ($item->users as $user)
                 <li>
-                  <a class="uk-accordion-title" href="#">{{ $user->fullname }}</a>
-                  <div class="uk-accordion-content">
-                      <div class='uk-width-1-2'>
-                        <form class='uk-form-stacked uk-grid-small uk-child-width-1-2@s' uk-grid method='post' action='/admin/change-user-password'>
-                          {{ csrf_field() }}
-                          <div>
-                            <input class='uk-input' name='password' type='password' required placeholder='Enter password'/>
-                          </div>
-                          <div>
-                            <input class='uk-input' name='confirmPassword' type='password' required placeholder='Confirm password' />
-                          </div>
-                          <div class='uk-width-1-1'>
-                            <button class='uk-button uk-button-primary uk-width-1-1' type='submit'>Change Password</button>
-                          </div>
-                        </form>
-                      </div>
+                  <div class='uk-grid-collapse uk-child-width-1-2' uk-grid>
+                    <div>
+                      <strong>{{ $user->lastname }}</strong>&nbsp;{{ $user->firstname}}
+                    </div>
+                    <div class='uk-text-right'>
+                      <a href='/admin/modify-user?id={{ $user->id }}' alt='Edit User'><span uk-icon="icon: file-edit; ratio: 1"></span></a>
+                      <a href='/admin/delete-user?id={{ $user->id }}' alt='Delete User'><span uk-icon="icon: trash; ratio: 1"></span></a>
+                    </div>
                   </div>
                 </li>
                 @endforeach

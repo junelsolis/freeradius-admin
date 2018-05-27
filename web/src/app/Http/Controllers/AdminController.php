@@ -99,22 +99,6 @@ class AdminController extends Controller
         ->with('users', $users)
         ->with('groups', $groups);
     }
-    public function showUserAdd() {
-      $check = $this->checkLoggedIn();
-      if ($check == false) {
-        session()->flush();
-        return redirect('/');
-      }
-
-      $userFullname = $this->getCurrentUserFullname();
-
-      // fetch from groups db
-      $groups = DB::table('groups')->orderBy('name')->get();
-
-      return view('userAdd')
-        ->with('groups', $groups)
-        ->with('userFullname', $userFullname);
-    }
 
     public function userAdd(Request $request) {
       $check = $this->checkLoggedIn();
@@ -123,63 +107,63 @@ class AdminController extends Controller
         return redirect('/');
       }
 
-      // validate request
       $request->validate([
-        'firstname' => 'string|required',
-        'lastname' => 'string|required',
-        'username' => 'string|required',
-        'password' => 'string|required',
-        'confirmPassword' => 'string|required',
-        'group' => 'int|required',
-        'logins' => 'int|required',
+        'username' => 'required|string',
+        'firstname' => 'required|string',
+        'lastname' => 'required|string',
+        'password' => 'required|string',
+        'confirmPassword' => 'required|string',
+        'group' => 'required|int',
+        'logins' => 'required|int'
       ]);
 
-      // assign variables
-      $firstname = ucfirst($request['firstname']);
-      $lastname = ucfirst($request['lastname']);
       $username = $request['username'];
+      $firstname = ucwords($request['firstname']);
+      $lastname = ucwords($request['lastname']);
       $password = $request['password'];
       $confirmPassword = $request['confirmPassword'];
       $group = $request['group'];
       $logins = $request['logins'];
 
-
-      // check that this username does not already exist
-      $exists = DB::table('users')->where('username', $username)->first();
-      if (!empty($exists)) {
-        return back()->with('error', 'Username already exists. Please choose another username.');
+      // check username does not already exist
+      $check = DB::table('users')->where('username', $username)->first();
+      if (empty($check)) {}
+      else {
+        return back()->with('error', 'Username already exists.');
       }
 
-      // check first and lastnames do not exist
-      $namesExist = DB::table('users')->where('firstname', $firstname)->where('lastname', $lastname)->first();
-      if (!empty($namesExist)) {
-        return back()->with('error', 'User already exists. Please modify the user instead.');
+      // check username string length
+      if (strlen($username) > 40) {
+        return back()->with('error', 'Username length exceeds 40 characters.');
+
       }
 
-      // run password checks
-      $checkPassword = $this->checkPassword($password, $confirmPassword, $firstname, $lastname);
-      if ($checkPassword !== TRUE) {
-        return back()->with('error', $checkPassword);
+      // check firstname and lastname string lengths
+      if (strlen($firstname) > 50 || strlen($lastname) > 50) {
+        return back()->with('error', 'First and last names cannot exceed 50 characters.');
       }
 
-      // encode password
+      // check password rules
+      $check = $this->checkPassword($password, $confirmPassword, $firstname, $lastname);
+      if ($check !== true) {
+        return back()->with('error', $check);
+      }
+
+      // hash password
       $password = sha1($password);
 
-      // if all checks passed, insert new user into database
+      // get group name
+      $group = DB::table('groups')->where('id', $group)->pluck('name')->first();
+
+
+
+      // insert into DB
       DB::table('users')->insert([
         'username' => $username,
         'firstname' => $firstname,
         'lastname' => $lastname,
       ]);
 
-      // insert group data
-      $groupName = DB::table('groups')->where('id', $group)->pluck('name')->first();
-      DB::table('radusergroup')->insert([
-        'username' => $username,
-        'groupname' => $groupName,
-      ]);
-
-      // insert radcheck data
       DB::table('radcheck')->insert([
         'username' => $username,
         'attribute' => 'SHA-Password',
@@ -194,9 +178,110 @@ class AdminController extends Controller
         'value' => $logins
       ]);
 
-      return redirect('/admin/users')->with('info', 'User added to database.');
+      DB::table('radusergroup')->insert([
+        'username' => $username,
+        'groupname' => $group
+      ]);
+
+      return redirect('/admin/users')->with('info', 'User added.');
+
     }
 
+    public function showUserModify(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $request->validate([
+        'id' => 'required|int'
+      ]);
+
+      $id = $request['id'];
+
+      $user = $this->getUserInfo($id);
+
+      $groups = DB::table('groups')->get();
+
+      return view('userModify')
+        ->with('user', $user)
+        ->with('groups', $groups);
+    }
+
+    public function userChangePassword(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $id = $request['id'];
+      $password = $request['password'];
+      $confirmPassword = $request['confirmPassword'];
+
+      if ($password != $confirmPassword) {
+        return back()->with('error', 'Passwords do not match.');
+      }
+
+      // password rules
+      $user = DB::table('users')->where('id', $id)->first();
+
+      $username = $user->username;
+      $firstname = $user->firstname;
+      $lastname = $user->lastname;
+
+      $check = $this->checkPassword($password, $confirmPassword, $firstname, $lastname);
+      if ($check !== true) {
+        return back()->with('error', $check);
+      }
+
+      // hash password
+      $password = sha1($password);
+
+      // update db
+      DB::table('radcheck')
+        ->where('username', $username)
+        ->where('attribute', 'SHA-Password')
+        ->update([
+          'value' => $password
+        ]);
+
+      return redirect('/admin/modify-user?id={{ $user->id }}')->with('info', 'Password changed.');
+    }
+
+    public function userChangeLogins(Request $request) {}
+
+    public function userChangeGroup(Request $request) {
+
+    }
+
+    public function userDelete(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $request->validate([
+        'id' => 'int|required'
+      ]);
+
+      $id = $request['id'];
+      $user = DB::table('users')->where('id', $id)->first();
+
+      if (empty($user)) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      DB::table('radcheck')->where('username', $user->username)->delete();
+      DB::table('radusergroup')->where('username', $user->username)->delete();
+      DB::table('users')->where('username', $user->username)->delete();
+
+      return redirect('/admin/users')->with('info', 'User deleted.');
+
+    }
 
     public function showAdmins() {
       $check = $this->checkLoggedIn();
@@ -516,6 +601,27 @@ class AdminController extends Controller
 
     }
 
+    private function getUserInfo($userId) {
+      $user = DB::table('users')->where('id', $userId)->first();
+
+      $username = $user->username;
+
+      $logins = DB::table('radcheck')
+        ->where('username', $username)
+        ->where('attribute', 'Simultaneous-Use')
+        ->pluck('value')->first();
+
+      $group = DB::table('radusergroup')
+        ->where('username', $username)
+        ->pluck('groupname')->first();
+
+      $user->fullname = $user->firstname . ' ' . $user->lastname;
+      $user->logins = $logins;
+      $user->group = $group;
+
+      return $user;
+
+    }
     private function getUsers($users) {
 
       $radcheck = DB::table('radcheck')->where('attribute', 'Simultaneous-Use')->get();

@@ -18,9 +18,11 @@ Route::get('/admin/logout', 'AdminController@logout');
 
 Route::get('/admin/users', 'AdminController@showUsers');
 Route::post('/admin/add-user', 'AdminController@userAdd');
-Route::get('/admin/list-users', 'AdminController@showUserList');
-Route::get('/admin/delete-users', 'AdminController@showUserDelete');
-Route::post('/admin/delete-users', 'AdminController@userDelete');
+Route::get('/admin/modify-user', 'AdminController@showUserModify');
+Route::post('/admin/modify-user/change-password', 'AdminController@userChangePassword');
+Route::get('/admin/delete-user', 'AdminController@userDelete');
+
+
 Route::get('/admin/show-admins', 'AdminController@showAdmins');
 Route::post('/admin/add-admin', 'AdminController@adminAdd');
 Route::post('/admin/modify-admin', 'AdminController@adminModify');
