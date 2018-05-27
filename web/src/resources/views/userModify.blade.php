@@ -33,8 +33,8 @@
       <div id='content' class='uk-width-3-5@s'>
         <h2 class='uk-heading-line'><span><strong>{{ $user->fullname }}</strong></span></h2>
 
-        <strong>Group</strong>&nbsp;staff<br />
-        <strong>Logins allowed</strong>&nbsp;3
+        <strong>Group</strong>&nbsp;{{ $user->group }}<br />
+        <strong>Logins allowed</strong>&nbsp;{{ $user->logins }}
 
         <h3 class='uk-heading-line subheading'><span>Modify</span></h3>
 
@@ -45,7 +45,7 @@
               <a class="uk-alert-close" uk-close></a>
               <p>{{ session('error')}}</p>
             </div>
-          </div>
+          </div><br />
           @endif
 
           @if (session('info'))
@@ -56,7 +56,7 @@
             </div>
           </div>
           @endif
-        </div>
+        </div><br />
 
         <form class='uk-form-stacked' method='post' action='/admin/modify-user/change-password'>
           {{ csrf_field() }}
@@ -90,7 +90,6 @@
         <form class='uk-form-stacked' method='post' action='/admin/modify-user/change-group'>
           {{ csrf_field() }}
           <input type='hidden' name='id' value='{{ $user->id }}' />
-
           <div class='uk-grid-small uk-child-width-1-3@s' uk-grid>
             <div>
             </div>

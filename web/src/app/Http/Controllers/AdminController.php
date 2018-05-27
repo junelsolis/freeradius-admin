@@ -247,12 +247,64 @@ class AdminController extends Controller
           'value' => $password
         ]);
 
-      return redirect('/admin/modify-user?id={{ $user->id }}')->with('info', 'Password changed.');
+      return redirect('/admin/modify-user?id='.$user->id)->with('info', 'Password changed.');
     }
 
-    public function userChangeLogins(Request $request) {}
+    public function userChangeLogins(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $request->validate([
+        'id' => 'required|int'
+      ]);
+
+      $id = $request['id'];
+      $logins = $request['logins'];
+
+      $user = DB::table('users')->where('id', $id)->first();
+      $username = $user->username;
+
+      DB::table('radcheck')->where('username', $username)
+        ->where('attribute', 'Simultaneous-Use')
+        ->update([
+          'value' => $logins
+        ]);
+
+      return redirect('/admin/modify-user?id='.$id)->with('info', 'User logins updated.');
+
+    }
 
     public function userChangeGroup(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $request->validate([
+        'id' => 'required|int',
+        'group' => 'required|int'
+      ]);
+
+      $id = $request['id'];
+      $groupId = $request['group'];
+
+      $user = DB::table('users')->where('id', $id)->first();
+      $group = DB::table('groups')->where('id', $groupId)->first();
+
+      // delete all groups entries for user
+      DB::table('radusergroup')->where('username', $user->username)->delete();
+
+      // make new entries
+      DB::table('radusergroup')->insert([
+        'username' => $user->username,
+        'groupname' => $group->name
+      ]);
+
+      return redirect('/admin/modify-user?id='.$id)->with('info', 'User group updated.');
 
     }
 

@@ -3,6 +3,6 @@
         "barryvdh/laravel-debugbar": "^3.1"
     },
     "require": {
-        "laravel/installer": "5.6.*"
+        "laravel/installer": "^2.0.1"
     }
 }
