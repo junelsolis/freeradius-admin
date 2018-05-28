@@ -2,21 +2,6 @@ version: "3.2"
 
 services:
 
-  radius:
-    container_name: fradmin-rad
-    build: ./freeradius
-    ports:
-     - "1812:1812"
-     - "1813:1813"
-    volumes:
-     - "./freeradius/src:/etc/freeradius/3.0"
-    networks:
-     radnet:
-      ipv4_address: 172.100.0.100
-    tty: true
-    entrypoint: /rad_service_start.sh
-
-
   mysql:
     container_name: fradmin-mysql
     build: ./mysql
@@ -62,6 +47,21 @@ services:
       radnet:
         ipv4_address: 172.100.0.103
     tty: true
+
+  radius:
+    container_name: fradmin-rad
+    build: ./freeradius
+    ports:
+     - "1812:1812"
+     - "1813:1813"
+    volumes:
+     - "./freeradius/src:/etc/freeradius/3.0"
+    networks:
+     radnet:
+      ipv4_address: 172.100.0.100
+    tty: true
+    entrypoint: /rad_service_start.sh
+
 
 networks:
  radnet:
