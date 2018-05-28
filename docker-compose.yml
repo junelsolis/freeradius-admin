@@ -22,6 +22,8 @@ services:
   apache:
     container_name: fradmin-web
     build: ./web
+    depends_on:
+      - mysql
     ports:
      - "80:80/tcp"
      - "443:443"
@@ -37,6 +39,8 @@ services:
   phpmyadmin:
     container_name: fradmin-pma
     build: ./phpmyadmin
+    depends_on:
+      - mysql
     ports:
      - "8080:80"
     environment:
@@ -51,6 +55,8 @@ services:
   radius:
     container_name: fradmin-rad
     build: ./freeradius
+    depends_on:
+      - mysql
     ports:
      - "1812:1812"
      - "1813:1813"
