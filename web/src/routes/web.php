@@ -16,14 +16,7 @@ Route::post('/', 'LoginController@login');
 Route::get('/admin', 'AdminController@showDashboard');
 Route::get('/admin/logout', 'AdminController@logout');
 
-// Route::post('/admin/add-user', 'AdminController@userAdd');
-// Route::get('/admin/modify-user', 'AdminController@showUserModify');
-// Route::post('/admin/modify-user/change-password', 'AdminController@userChangePassword');
-// Route::post('/admin/modify-user/change-logins', 'AdminController@userChangeLogins');
-// Route::post('/admin/modify-user/change-group', 'AdminController@userChangeGroup');
-// Route::post('/admin/modify-user/change-name', 'AdminController@userChangeName');
-// Route::get('/admin/delete-user', 'AdminController@userDelete');
-//
+
 
 Route::get('/admin/users', 'AdminController@showUsers');
 Route::get('/admin/users/add-user', 'AdminController@showUserAdd');
