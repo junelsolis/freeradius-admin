@@ -68,6 +68,16 @@ services:
     tty: true
     entrypoint: /rad_service_start.sh
 
+  radtest:
+    container_name: fradmin-radtest
+    build: ./radtest
+    depends_on:
+      - radius
+    tty: true
+    networks:
+      radnet:
+        ipv4_address: 172.100.0.104
+
 
 networks:
  radnet:
