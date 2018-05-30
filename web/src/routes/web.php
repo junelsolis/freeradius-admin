@@ -22,6 +22,7 @@ Route::get('/admin/modify-user', 'AdminController@showUserModify');
 Route::post('/admin/modify-user/change-password', 'AdminController@userChangePassword');
 Route::post('/admin/modify-user/change-logins', 'AdminController@userChangeLogins');
 Route::post('/admin/modify-user/change-group', 'AdminController@userChangeGroup');
+Route::post('/admin/modify-user/change-name', 'AdminController@userChangeName');
 Route::get('/admin/delete-user', 'AdminController@userDelete');
 
 

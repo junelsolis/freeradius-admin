@@ -73,6 +73,23 @@
             </div>
           </div>
         </form><br />
+
+        <form class='uk-form-stacked' method='post' action='/admin/modify-user/change-name'>
+          {{ csrf_field() }}
+          <input type='hidden' name='id' value='{{ $user->id }}' />
+          <div class='uk-grid-small uk-child-width-1-3@s' uk-grid>
+            <div>
+              <input class='uk-input' name='firstname' type='text' required placeholder='Firstname' />
+            </div>
+            <div>
+              <input class='uk-input' name='lastname' type='text' required placeholder='Lastname' />
+            </div>
+            <div>
+              <button class='uk-button uk-button-primary uk-width-1-1' type='submit'>Change Names</button>
+            </div>
+          </div>
+        </form><br />
+
         <form class='uk-form-stacked' method='post' action='/admin/modify-user/change-logins'>
           {{ csrf_field() }}
           <input type='hidden' name='id' value='{{ $user->id }}' />

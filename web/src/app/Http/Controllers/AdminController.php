@@ -8,24 +8,6 @@ use DB;
 class AdminController extends Controller
 {
 
-    public function showDashboard() {
-      $check = $this->checkLoggedIn();
-      if ($check == false) {
-        session()->flush();
-        return redirect('/');
-      }
-
-      // get current user's name
-      $userFullname = $this->getCurrentUserFullname();
-
-      // fetch all users from db
-      // $users = DB::table('users')->orderBy('lastname')->get();
-      // $users = $this->getUsers($users);
-
-      return view('dashboard')
-        ->with('userFullname', $userFullname);
-
-    }
 
     public function logout() {
       $check = $this->checkLoggedIn();
@@ -305,6 +287,33 @@ class AdminController extends Controller
       ]);
 
       return redirect('/admin/modify-user?id='.$id)->with('info', 'User group updated.');
+
+    }
+
+    public function userChangeName(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $request->validate([
+        'id' => 'int|required',
+        'firstname' => 'string|required',
+        'lastname' => 'string|required'
+      ]);
+
+      $id = $request['id'];
+      $firstname = ucfirst($request['firstname']);
+      $lastname = ucfirst($request['lastname']);
+
+      // update database
+      DB::table('users')->where('id', $id)->update([
+        'firstname' => $firstname,
+        'lastname' => $lastname
+      ]);
+
+      return redirect('/admin/modify-user?id='.$id)->with('info', 'User names changed.');
 
     }
 
