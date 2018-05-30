@@ -13,11 +13,13 @@ Login credentials: **testadmin**, **password**
 The simplest way to install this app is using Docker.
 
 1. Clone this repository
-2. Use the **docker-compose.yml** file to build and run the containers.
-3. Run this command in your container host:
-```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
+1. Run ```cd freeradius-admin```
+2. Run ```docker-compose build```
+3. Run ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
+3. Run ```docker compose up```
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
 4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
+5. To test the RADIUS server, first add a user using the web gui. Then login to the shell of the radtest container using ```docker container exec -it fradmin-radtest /bin/sh```. Run ```radtest username password 172.100.0.100:1812 0 testing123```.
 
 ![FreeRADIUS Admin](scr3.png)![FreeRADIUS Admin](scr4.png)
 # Production Setups
