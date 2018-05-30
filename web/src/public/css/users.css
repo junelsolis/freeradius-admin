@@ -5,3 +5,9 @@
 #list-user a {
   color: rgb(128,128,128);
 }
+
+.letter {
+  color: rgb(0,77,149);
+  font-size: 2.8em;
+  font-weight: bold;
+}

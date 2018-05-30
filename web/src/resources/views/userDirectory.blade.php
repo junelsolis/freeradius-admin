@@ -36,7 +36,7 @@
 
 
         @foreach ($users as $item)
-        <h3 class='subheading uk-heading-line' id='letter-{{ $item->letter }}'><span>{{ $item->letter }}</span></h3>
+        <h3 class='letter uk-heading-line' id='letter-{{ $item->letter }}'><span>{{ $item->letter }}</span></h3>
         <ul uk-accordion>
           @foreach ($item->users as $user)
           <li>
