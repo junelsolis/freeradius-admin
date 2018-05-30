@@ -77,7 +77,7 @@ class AdminController extends Controller
 
       $users = $this->collectUsersAlpha($users);
 
-      return view('users')
+      return view('userDirectory')
         ->with('users', $users)
         ->with('groups', $groups);
     }
@@ -198,6 +198,7 @@ class AdminController extends Controller
         return redirect('/');
       }
 
+      $origin = $request['origin'];
       $id = $request['id'];
       $password = $request['password'];
       $confirmPassword = $request['confirmPassword'];
@@ -229,7 +230,7 @@ class AdminController extends Controller
           'value' => $password
         ]);
 
-      return redirect('/admin/modify-user?id='.$user->id)->with('info', 'Password changed.');
+      return redirect($origin)->with('info', 'Password changed.');
     }
 
     public function userChangeLogins(Request $request) {
@@ -243,6 +244,7 @@ class AdminController extends Controller
         'id' => 'required|int'
       ]);
 
+      $origin = $request['origin'];
       $id = $request['id'];
       $logins = $request['logins'];
 
@@ -255,7 +257,7 @@ class AdminController extends Controller
           'value' => $logins
         ]);
 
-      return redirect('/admin/modify-user?id='.$id)->with('info', 'User logins updated.');
+      return redirect($origin)->with('info', 'User logins updated.');
 
     }
 
@@ -271,6 +273,7 @@ class AdminController extends Controller
         'group' => 'required|int'
       ]);
 
+      $origin = $request['origin'];
       $id = $request['id'];
       $groupId = $request['group'];
 
@@ -286,7 +289,7 @@ class AdminController extends Controller
         'groupname' => $group->name
       ]);
 
-      return redirect('/admin/modify-user?id='.$id)->with('info', 'User group updated.');
+      return redirect($origin)->with('info', 'User group updated.');
 
     }
 
@@ -299,10 +302,12 @@ class AdminController extends Controller
 
       $request->validate([
         'id' => 'int|required',
+        'origin' => 'string|required',
         'firstname' => 'string|required',
         'lastname' => 'string|required'
       ]);
 
+      $origin = $request['origin'];
       $id = $request['id'];
       $firstname = ucfirst($request['firstname']);
       $lastname = ucfirst($request['lastname']);
@@ -313,7 +318,7 @@ class AdminController extends Controller
         'lastname' => $lastname
       ]);
 
-      return redirect('/admin/modify-user?id='.$id)->with('info', 'User names changed.');
+      return redirect($origin)->with('info', 'User names changed.');
 
     }
 

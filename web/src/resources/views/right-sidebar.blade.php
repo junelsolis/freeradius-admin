@@ -1,5 +1,30 @@
 <html>
   <div id='right-sidebar' class='uk-width-1-5@s'>
+
+    @if (session('error'))
+    <div class='uk-grid-collapse' uk-grid>
+      <div class='uk-width-1-1'>
+        <div class="uk-alert-danger" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>{{ session('error')}}</p>
+        </div>
+      </div>
+    </div><br /><br />
+    @endif
+
+    @if (session('info'))
+    <div class='uk-grid-collapse' uk-grid>
+      <div class='uk-width-1-1'>
+        <div class="uk-alert-success" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>{{ session('info')}}</p>
+        </div>
+      </div>
+    </div>
+    <div class='uk-width-expand'>
+
+    </div><br /><br />
+    @endif
     <ul class='uk-nav uk-nav-default'>
       Logged in as:<br />
       <strong>{{ session('fullname') }}</strong><br />
