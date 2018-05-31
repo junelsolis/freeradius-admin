@@ -77,7 +77,7 @@ class AdminController extends Controller
 
       $users = $this->collectUsersAlpha($users);
 
-      return view('users')
+      return view('userDirectory')
         ->with('users', $users)
         ->with('groups', $groups);
     }
