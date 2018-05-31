@@ -77,11 +77,22 @@ class AdminController extends Controller
 
       $users = $this->collectUsersAlpha($users);
 
-      return view('userDirectory')
+      return view('users')
         ->with('users', $users)
         ->with('groups', $groups);
     }
 
+    public function showUserAdd() {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $groups = DB::table('groups')->orderby('name')->get();
+
+      return view('userAdd')->with('groups', $groups);
+    }
     public function userAdd(Request $request) {
       $check = $this->checkLoggedIn();
       if ($check == false) {
@@ -99,6 +110,7 @@ class AdminController extends Controller
         'logins' => 'required|int'
       ]);
 
+      $origin = $request['origin'];
       $username = $request['username'];
       $firstname = ucwords($request['firstname']);
       $lastname = ucwords($request['lastname']);
@@ -165,7 +177,7 @@ class AdminController extends Controller
         'groupname' => $group
       ]);
 
-      return redirect('/admin/users')->with('info', 'User added.');
+      return redirect($origin)->with('info', 'User added.');
 
     }
 
