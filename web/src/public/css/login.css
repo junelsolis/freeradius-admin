@@ -1,11 +1,19 @@
 
-#title h2 {
-  color: rgb(102,102,102);
+#title1 {
+  color: rgb(0,77,149);
+  font-family: 'Exo', sans-serif;
+  font-weight: 900;
+  font-style: italic;
 }
 
-#title h2 em {
-  color: rgb(0,77,149);
+#title2 {
+  color: rgb(120,120,120);
+  font-family: 'Exo', sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
+
+
 
 #login-button {
   color: rgb(0,77,149);

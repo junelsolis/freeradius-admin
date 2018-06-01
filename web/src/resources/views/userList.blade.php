@@ -17,8 +17,8 @@
 
 
 
-  <div id='header' class='uk-margin-large-bottom'>
-    <h2 class='uk-margin-left'><strong><em>FreeRADIUS</em></strong>Admin</h2>
+  <div id='header' class='uk-margin-large-bottom uk-margin-medium-left'>
+    <h2><span id='title1'>FREERADIUS</span><span id='title2'>Admin</span></h2>
   </div>
 
 
