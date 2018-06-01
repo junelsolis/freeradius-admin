@@ -1,14 +1,15 @@
-/* #header {
-  background-color: rgb(80,80,80);
-} */
-
-#header h2 {
-  color: rgb(102,102,102);
+#title1 {
+  color: rgb(0,77,149);
+  font-family: 'Exo', sans-serif;
+  font-weight: 900;
+  font-style: italic;
 }
 
-#header em {
-  color: rgb(0,77,149);
-  /* color: rgb(5,133,169); */
+#title2 {
+  color: rgb(120,120,120);
+  font-family: 'Exo', sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
 #right-sidebar a {

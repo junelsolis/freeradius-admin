@@ -10,6 +10,7 @@
   <script src="{{ asset('js/uikit.min.js') }}"></script>
   <script src="{{ asset('js/uikit-icons.min.js') }}"></script>
 
+  <link href="https://fonts.googleapis.com/css?family=Exo:400,900i," rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
   <title>FreeRADIUS Admin</title>
 </head>
@@ -17,7 +18,7 @@
   <div class="uk-container-small">
     <div class="uk-position-center">
       <div id="title">
-        <h2 class="uk-text-center"><strong><em>FreeRADIUS</em></strong>Admin</h2>
+        <h2 class="uk-text-center"><span id='title1'>FREERADIUS</span><span id='title2'>Admin</span></h2>
       </div><br />
       @if (session('error'))
       <div class="uk-alert-warning" uk-alert>
