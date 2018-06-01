@@ -26,7 +26,8 @@ Route::post('/admin/users/modify-user/change-password', 'AdminController@userCha
 Route::post('/admin/users/modify-user/change-logins', 'AdminController@userChangeLogins');
 Route::post('/admin/users/modify-user/change-group', 'AdminController@userChangeGroup');
 Route::post('/admin/users/modify-user/change-name', 'AdminController@userChangeName');
-Route::get('/admin/users/delete-user', 'AdminController@userDelete');
+Route::post('/admin/users/modify-user/change-username', 'AdminController@userChangeUsername');
+Route::post('/admin/users/delete-user', 'AdminController@userDelete');
 
 
 Route::get('/admin/show-admins', 'AdminController@showAdmins');

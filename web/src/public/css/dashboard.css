@@ -35,6 +35,17 @@
   color: white;
 }
 
+#content .uk-button-danger {
+  border-color: rgb(240,80,110);
+  background-color: white;
+  color: rgb(240,80,110);
+}
+
+#content .uk-button-danger:hover {
+  background-color: rgb(240,80,110);
+  color: white;
+}
+
 td a {
   color: rgb(102,102,102);
 }

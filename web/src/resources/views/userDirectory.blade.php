@@ -43,6 +43,24 @@
             <a class="uk-accordion-title" href="#" id='user-{{ $user->id }}'><strong>{{ $user->lastname}},&nbsp;</strong>{{ $user->firstname }}</a>
             <div class="uk-accordion-content">
 
+              <form class='uk-form-stacked' action='/admin/users/modify-user/change-username' method='post'>
+                {{ csrf_field() }}
+                <input name='id' type='hidden' value='{{ $user->id }}' />
+                <input name='origin' type='hidden' value='admin/users' />
+
+                <div class='uk-grid-small uk-child-width-1-3@s' uk-grid>
+                  <div>
+                  </div>
+                  <div>
+                    <input class='uk-input' name='username' type='text' value='{{ $user->username }}'required placeholder='Enter username' />
+                  </div>
+                  <div>
+                    <button class='uk-width-1-1 uk-button uk-button-primary' type='submit'>Change Username</button>
+                  </div>
+
+                </div>
+              </form><br />
+
 
               <form class='uk-form-stacked' action='/admin/users/modify-user/change-password' method='post'>
                 <div class='uk-grid-small uk-child-width-1-3@s' uk-grid>
@@ -60,6 +78,7 @@
                   </div>
                 </div>
               </form><br />
+
 
               <form class='uk-form-stacked' action='/admin/users/modify-user/change-name' method='post'>
                 <div class='uk-grid-small uk-child-width-1-3@s' uk-grid>
@@ -116,8 +135,23 @@
                     <button class='uk-width-1-1 uk-button uk-button-primary' type='submit'>Change Group</button>
                   </div>
                 </div>
-              </form>
+              </form><br />
 
+
+              <form class='uk-form-stacked' action='/admin/users/delete-user' method='post'>
+                <div class='uk-grid-small uk-child-width-1-3@s' uk-grid>
+                  {{ csrf_field() }}
+                  <input type='hidden' name='id' value='{{ $user->id }}' />
+                  <input type='hidden' name='origin' value='/admin/users' />
+                  <div>
+                  </div>
+                  <div>
+                  </div>
+                  <div>
+                    <button class='uk-width-1-1 uk-button uk-button-danger' type='submit'><span uk-icon="icon: trash"></span>Delete User</button>
+                  </div>
+                </div>
+              </form>
 
             </div>
           </li>

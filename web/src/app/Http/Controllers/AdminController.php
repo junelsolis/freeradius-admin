@@ -334,6 +334,35 @@ class AdminController extends Controller
 
     }
 
+    public function userChangeUsername(Request $request) {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+
+      $origin = $request['origin'];
+      $id = $request['id'];
+      $username = $request['username'];
+
+      $oldUsername = DB::table('users')->where('id', $id)->pluck('username')->first();
+
+      // update tables
+      DB::table('users')->where('id', $id)->update([
+        'username' => $username
+      ]);
+
+      DB::table('radcheck')->where('username', $oldUsername)->update([
+        'username' => $username
+      ]);
+
+      DB::table('radusergroup')->where('username', $oldUsername)->update([
+        'username' => $username
+      ]);
+
+      return redirect($origin)->with('Username changed.');
+    }
+
     public function userDelete(Request $request) {
       $check = $this->checkLoggedIn();
       if ($check == false) {
@@ -345,6 +374,7 @@ class AdminController extends Controller
         'id' => 'int|required'
       ]);
 
+      $origin = $request['origin'];
       $id = $request['id'];
       $user = DB::table('users')->where('id', $id)->first();
 
@@ -357,7 +387,7 @@ class AdminController extends Controller
       DB::table('radusergroup')->where('username', $user->username)->delete();
       DB::table('users')->where('username', $user->username)->delete();
 
-      return redirect('/admin/users')->with('info', 'User deleted.');
+      return redirect($origin)->with('info', 'User deleted.');
 
     }
 
