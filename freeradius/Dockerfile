@@ -4,3 +4,4 @@ RUN apt-get update && apt-get upgrade -y && apt-get install freeradius freeradiu
 
 ADD ./rad_service_start.sh /rad_service_start.sh
 RUN ["chmod", "+x", "/rad_service_start.sh"]
+CMD ["./rad_service_start.sh"]
