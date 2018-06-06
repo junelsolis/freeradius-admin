@@ -68,7 +68,7 @@ services:
      radnet:
       ipv4_address: 172.100.0.100
     tty: true
-    restart: alwaysQ
+    restart: always
     #entrypoint: /rad_service_start.sh
 
   radtest:
