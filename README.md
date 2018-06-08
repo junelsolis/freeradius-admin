@@ -6,7 +6,7 @@ A web interface for FreeRADIUS with a MySQL backend.
 ![FreeRADIUS Admin](scr2.png)
 
 # Try the Demo Site
-[https://fradmin-demo.junelsolis.com:3001](http://fradmin-demo.junelsolis.com:3001)
+[https://fradmin-demo.junelsolis.com:3001](https://fradmin-demo.junelsolis.com:3001)
 
 Login credentials: **testadmin**, **password**
 
