@@ -6,7 +6,8 @@ A web interface for FreeRADIUS with a MySQL backend.
 ![FreeRADIUS Admin](scr2.png)
 
 # Try the Demo Site
-[https://freeradiusadmin-demo.junelsolis.com](http://freeradiusadmin-demo.junelsolis.com)\
+[https://fradmin-demo.junelsolis.com:3001](http://freeradiusadmin-demo.junelsolis.com)
+
 Login credentials: **testadmin**, **password**
 
 # Install with Docker for Testing
