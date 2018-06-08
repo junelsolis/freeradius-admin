@@ -45,8 +45,8 @@
       <div id="footer">
         <br /><br />
         <p>
-          <span uk-icon="icon: file-edit"></span> by Junel Solis on <span uk-icon="icon: github"></span> GitHub<br />
-          FreeRADIUS Admin is <a href="https://github.com/junelsolis/web-freeradius-mysql">open source</a>.
+          <span uk-icon="icon: file-edit"></span> by Junel Solis on Gitlab<br />
+          FreeRADIUS Admin is <a href="https://gitlab.com/junelsolis/freeradius-admin" target='_blank'>open source</a>.
         </p>
       </div>
     </div>
