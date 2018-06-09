@@ -1,4 +1,4 @@
-![FreeRADIUS Admin](scr.png)
+![FreeRADIUS Admin](banner.png)
 
 A web interface for FreeRADIUS with a MySQL backend.
 
