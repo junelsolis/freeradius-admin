@@ -3,8 +3,6 @@
 A web interface for FreeRADIUS with a MySQL backend.
 
 
-![FreeRADIUS Admin](scr2.png)
-
 # Try the Demo Site
 [https://fradmin-demo.junelsolis.com:3001](https://fradmin-demo.junelsolis.com:3001)
 
@@ -22,7 +20,6 @@ The simplest way to install this app is using Docker.
 4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
 5. To test the RADIUS server, first add a user using the web gui. Then login to the shell of the radtest container using ```docker container exec -it fradmin-radtest /bin/sh```. Run ```radtest username password 172.100.0.100:1812 0 testing123```.
 
-![FreeRADIUS Admin](scr3.png)![FreeRADIUS Admin](scr4.png)
 # Production Setups
 1. The folder *./mysql/src/data* must be emptied to prevent any conflicts with database passwords.
 2. Edit [docker-compose.yml](docker-compose.yml). Change the ```MYSQL_ROOT_PASSWORD``` entry to your own password.
