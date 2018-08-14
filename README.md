@@ -13,7 +13,7 @@ The simplest way to install this app is using Docker.
 
 1. Clone this repository
 1. Run ```cd freeradius-admin```
-2. Run ```docker-compose build`
+2. Run ```docker-compose build```
 3. Run ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
 3. Run ```docker compose up```
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
