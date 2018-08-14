@@ -4,7 +4,7 @@ A web interface for FreeRADIUS with a MySQL backend.
 
 
 # Try the Demo Site
-[https://fradmin-demo.junelsolis.com:3001](https://fradmin-demo.junelsolis.com:3001)
+[https://fradmin-demo.junelsolis.com](https://fradmin-demo.junelsolis.com)
 
 Login credentials: **testadmin**, **password**
 
@@ -13,11 +13,11 @@ The simplest way to install this app is using Docker.
 
 1. Clone this repository
 1. Run ```cd freeradius-admin```
-2. Run ```docker-compose build```
+2. Run ```docker-compose build`
 3. Run ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
 3. Run ```docker compose up```
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
-4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost:8080).
+4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost/phpmyadmin).
 5. To test the RADIUS server, first add a user using the web gui. Then login to the shell of the radtest container using ```docker container exec -it fradmin-radtest /bin/sh```. Run ```radtest username password 172.100.0.100:1812 0 testing123```.
 
 # Production Setups
@@ -25,16 +25,13 @@ The simplest way to install this app is using Docker.
 2. Edit [docker-compose.yml](docker-compose.yml). Change the ```MYSQL_ROOT_PASSWORD``` entry to your own password.
 3. Edit [./web/src/.env](./web/src/.env) by changing the database settings to match the above.
 4. **IMPORTANT** Navigate to the *./web/src* directory and run the following code ```php artisan key:generate``` in order to generate an app key.
-5. Edit [./web/conf/sites-enabled/000-default.conf](.web/conf/sites-enabled/000-default.conf) as needed in your configuration.
+5. Edit the reverse proxy config file [./web/revproxy/conf.d/default.conf](.web/revproxy/conf.ddefault.conf) as needed.
+5. Disable phpmyadmin if you do not need it. Remove the entries in `docker-compose.yml` and the reverse proxy configuration.
 5. Build the images by running ```docker-compose build``` at the project root.
 6. Run ```docker-compose up -d``` to run the services in the background.
 7. Confirm the services are up ```docker container ps```.
-8. Set web server volume permissions: ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
-9. **OPTIONAL:** Make *./generate-le.sh* executable ```chmod u+x generate-le.sh``` then run ```.generate-le.sh``` to generate a LetsEncrypt SSL certificate using the manual DNS method.
+9. **OPTIONAL:** Make *./generate-le.sh* executable ```chmod u+x generate-le.sh``` then run ```.generate-le.sh``` to generate a LetsEncrypt SSL certificate using standalone method. You may need to modify this script in order to work with your specific setup.
 
-**Notes about docker configuration:**
-
-The docker-compose file will create four services: **rad-server**, **mysql-server**, **apache2-server** and **phpmyadmin**. All four containers have network connectivity with each other through static ip's on their own bridge network. Ports are forwarded or exposed as needed.
 
 **mysql**
 
