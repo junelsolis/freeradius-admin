@@ -3,10 +3,11 @@ version: "3.2"
 services:
 
   mysql:
-    container_name: fradmin-mysql
-    build: ./mysql
-    expose:
-     - "3306"
+    build:
+      context: ./mysql
+      dockerfile: mysql.dockerfile
+    # expose:
+    #  - "3306"
     volumes:
      - ./mysql/srv/conf.d:/etc/mysql/conf.d
      - ./mysql/srv/initdb.d:/docker-entrypoint-initdb.d
@@ -20,42 +21,47 @@ services:
     restart: always
 
 
-  apache:
-    container_name: fradmin-web
-    build: ./web
+  webserver:
+    build:
+      context: ./web
+      dockerfile: webserver.dockerfile
     depends_on:
       - mysql
-    ports:
-     - "80:80/tcp"
-     - "443:443"
     volumes:
      - "./web/src:/var/www/html"
-     - ".le:/etc/letsencrypt"
-     - "./web/conf/sites-enabled:/etc/apache2/sites-enabled"
+     - "./letsencrypt:/etc/letsencrypt"
+     - "./web/conf.d:/etc/nginx/conf.d"
     networks:
-     radnet:
-      ipv4_address: 172.100.0.102
+     - radnet
     tty: true
     restart: always
 
+  app:
+    build:
+      context: ./web
+      dockerfile: app.dockerfile
+    restart: always
+    working_dir: /var/www
+    volumes:
+      - "./web/src:/var/www/html"
+    networks:
+      - radnet
+    restart: always
+
   phpmyadmin:
-    container_name: fradmin-pma
     build: ./phpmyadmin
     depends_on:
       - mysql
-    ports:
-     - "8080:80"
     environment:
-      PMA_HOST: 172.100.0.101
-      PMA_USER: root
-      PMA_PASSWORD: password
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+      - PMA_ABSOLUTE_URI=http://localhost/phpmyadmin/
     networks:
-      radnet:
-        ipv4_address: 172.100.0.103
+      - radnet
     tty: true
 
   radius:
-    container_name: fradmin-rad
     build: ./freeradius
     depends_on:
       - mysql
@@ -72,7 +78,6 @@ services:
     #entrypoint: /rad_service_start.sh
 
   radtest:
-    container_name: fradmin-radtest
     build: ./radtest
     depends_on:
       - radius
@@ -81,6 +86,22 @@ services:
       radnet:
         ipv4_address: 172.100.0.104
 
+
+  revproxy:
+    build:
+      context: ./
+      dockerfile: ./revproxy/revproxy.dockerfile
+    restart: always
+    links:
+      - webserver
+      - phpmyadmin
+    volumes:
+      - "./revproxy/conf.d:/etc/nginx/conf.d"
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - radnet
 
 networks:
  radnet:

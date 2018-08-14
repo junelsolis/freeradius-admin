@@ -4,7 +4,7 @@
 # that will allow you to acquire a letsencrypt
 # certificate using the manual DNS method.
 docker run -it --rm \
-  -v $(pwd)/le:/etc/letsencrypt \
+  -v $(pwd)/letsencrypt:/etc/letsencrypt \
   ekho/certbot \
   certonly --manual --preferred-challenges dns \
   --agree-tos
