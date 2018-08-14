@@ -56,7 +56,7 @@ services:
       - PMA_HOST=mysql
       - PMA_USER=root
       - PMA_PASSWORD=password
-      - PMA_ABSOLUTE_URI=http://localhost/phpmyadmin/
+      - PMA_ABSOLUTE_URI=http://localhost/phpmyadmin
     networks:
       - radnet
     tty: true
