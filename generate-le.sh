@@ -1,10 +1,6 @@
 #!/bin/bash
-
-# This script will run a docker container
-# that will allow you to acquire a letsencrypt
-# certificate using the manual DNS method.
-docker run -it --rm \
-  -v $(pwd)/letsencrypt:/etc/letsencrypt \
-  ekho/certbot \
-  certonly --manual --preferred-challenges dns \
-  --agree-tos
+docker run -it --rm --name certbot \
+              -v "/etc/letsencrypt:/etc/letsencrypt" \
+              -v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+	            -p 80:80 \
+              certbot/certbot certonly
