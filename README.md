@@ -1,4 +1,4 @@
-![FreeRADIUS Admin](banner.svg | width=200)
+![FreeRADIUS Admin](banner.svg =250x)
 
 A web interface for FreeRADIUS with a MySQL backend.
 
