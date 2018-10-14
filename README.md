@@ -4,7 +4,7 @@ A web interface for FreeRADIUS with a MySQL backend.
 
 
 # Try the Demo Site
-[https://fradmin-demo.junelsolis.com](https://fradmin-demo.junelsolis.com)
+[https://fradmin-demo.junelsolis.com](https://fradmin-demo.junelsolis.com | width=200)
 
 Login credentials: **admin**, **password**
 
