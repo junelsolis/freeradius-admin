@@ -1,4 +1,4 @@
-<img src='https://github.com/junelsolis/freeradius-admin/blob/master/banner.svg' width="200">
+<img src='https://github.com/junelsolis/freeradius-admin/blob/master/banner.svg' width="500">
 
 A web interface for FreeRADIUS with a MySQL backend.
 
