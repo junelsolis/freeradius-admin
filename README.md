@@ -1,10 +1,10 @@
-![FreeRADIUS Admin](banner.svg)
+![FreeRADIUS Admin](banner.svg | width=200)
 
 A web interface for FreeRADIUS with a MySQL backend.
 
 
 # Try the Demo Site
-[https://fradmin-demo.junelsolis.com](https://fradmin-demo.junelsolis.com | width=200)
+[https://fradmin-demo.junelsolis.com](https://fradmin-demo.junelsolis.com)
 
 Login credentials: **admin**, **password**
 
