@@ -1,111 +1,72 @@
-version: "3.2"
+version: "3.6"
 
 services:
 
   mysql:
-    build:
-      context: ./mysql
-      dockerfile: mysql.dockerfile
-    # expose:
-    #  - "3306"
+    image: mysql:5.7.22
+    container_name: fradmin-mysql
     volumes:
      - ./mysql/srv/conf.d:/etc/mysql/conf.d
      - ./mysql/srv/initdb.d:/docker-entrypoint-initdb.d
      - ./mysql/srv/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
-    networks:
-     radnet:
-      ipv4_address: 172.100.0.101
-    tty: true
     restart: always
 
 
-  webserver:
-    build:
-      context: ./web
-      dockerfile: webserver.dockerfile
+  nginx:
+    image: nginx
+    container_name: fradmin-nginx
     depends_on:
       - mysql
+      - php
     volumes:
      - "./web/src:/var/www/html"
-     - "./letsencrypt:/etc/letsencrypt"
      - "./web/conf.d:/etc/nginx/conf.d"
-    networks:
-     - radnet
-    tty: true
+    ports:
+      - "80:80"
     restart: always
 
-  app:
+  php:
     build:
-      context: ./web
-      dockerfile: app.dockerfile
+      context: ./php
+    container_name: fradmin-php
     restart: always
-    working_dir: /var/www
     volumes:
       - "./web/src:/var/www/html"
-    networks:
-      - radnet
     restart: always
 
   phpmyadmin:
-    build: ./phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    container_name: fradmin-pma
     depends_on:
       - mysql
     environment:
       - PMA_HOST=mysql
       - PMA_USER=root
       - PMA_PASSWORD=password
-      - PMA_ABSOLUTE_URI=http://localhost/phpmyadmin
-    networks:
-      - radnet
-    tty: true
+    ports:
+      - "9200:80"
 
   radius:
-    build: ./freeradius
+    image: freeradius/freeradius-server:3.0.17
+    container_name: fradmin-radius
     depends_on:
       - mysql
     ports:
      - "1812:1812"
      - "1813:1813"
     volumes:
-     - "./freeradius/src:/etc/freeradius/3.0"
-    networks:
-     radnet:
-      ipv4_address: 172.100.0.100
-    tty: true
+    - "./freeradius/config/freeradius:/etc/freeradius"
+    - "./freeradius/logs:/var/log/freeradius"
+
     restart: always
-    #entrypoint: /rad_service_start.sh
+    #tty: true
 
   radtest:
     build: ./radtest
+    container_name: fradmin-radtest
     depends_on:
       - radius
-    tty: true
-    networks:
-      radnet:
-        ipv4_address: 172.100.0.104
-
-
-  revproxy:
-    build:
-      context: ./
-      dockerfile: ./revproxy/revproxy.dockerfile
     restart: always
-    links:
-      - webserver
-      - phpmyadmin
-    volumes:
-      - "./revproxy/conf.d:/etc/nginx/conf.d"
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - radnet
-
-networks:
- radnet:
-  driver: bridge
-  ipam:
-   config:
-   - subnet: 172.100.0.0/24
+    tty: true
