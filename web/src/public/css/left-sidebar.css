@@ -1,0 +1,22 @@
+#left-sidebar {
+  background-color: #F2F2F2;
+  min-height: 100vh;
+  padding-left: 30px;
+  padding-top: 100px;
+
+  position: fixed;
+}
+
+#left-sidebar > div {
+  padding-top: 30px;
+}
+
+#left-sidebar ul {
+  list-style: none;
+}
+
+#left-sidebar li a {
+  font-family: 'Montserrat', sans-serif;
+  color: #444444;
+  font-size: 0.85em;
+}

@@ -203,6 +203,10 @@ class AdminController extends Controller
         ->with('groups', $groups);
     }
 
+    public function showDashboard() {
+      return view('dashboard');
+    }
+
     public function userChangePassword(Request $request) {
       $check = $this->checkLoggedIn();
       if ($check == false) {
