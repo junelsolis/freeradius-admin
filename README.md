@@ -11,22 +11,21 @@ Login credentials: **testadmin**, **password**
 # Install with Docker for Testing
 The simplest way to install this app is using Docker.
 
-1. Clone this repository
+1. Clone the master branch of this repository
 1. Run ```cd freeradius-admin```
 2. Run ```docker-compose build```
 3. Run ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
 3. Run ```docker compose up```
-3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **testadmin** and **password**.
-4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:8080](http://localhost/phpmyadmin).
-5. To test the RADIUS server, first add a user using the web gui. Then login to the shell of the radtest container using ```docker container exec -it fradmin-radtest /bin/sh```. Run ```radtest username password 172.100.0.100:1812 0 testing123```.
+3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **admin** and **password**.
+4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:9200](http://localhost:9200).
+5. To test the RADIUS server, login to the shell of the radtest container using ```docker container exec -it fradmin-radtest /bin/sh```. Run ```radtest testuser password  fradmin-radius:1812 0 testing123```.
 
-# Production Setups
+# Production Setup
 1. The folder *./mysql/src/data* must be emptied to prevent any conflicts with database passwords.
 2. Edit [docker-compose.yml](docker-compose.yml). Change the ```MYSQL_ROOT_PASSWORD``` entry to your own password.
 3. Edit [./web/src/.env](./web/src/.env) by changing the database settings to match the above.
+3. Edit [./freeradius/config/freeradius/mods-enabled/sql](sql) with the correct database root password.
 4. **IMPORTANT** Navigate to the *./web/src* directory and run the following code ```php artisan key:generate``` in order to generate an app key.
-5. Edit the reverse proxy config file [./web/revproxy/conf.d/default.conf](.web/revproxy/conf.ddefault.conf) as needed.
-5. Disable phpmyadmin if you do not need it. Remove the entries in `docker-compose.yml` and the reverse proxy configuration.
 5. Build the images by running ```docker-compose build``` at the project root.
 6. Run ```docker-compose up -d``` to run the services in the background.
 7. Confirm the services are up ```docker container ps```.
@@ -39,13 +38,13 @@ The **fradmin-mysql** container is configured with a generic username and passwo
 
 Furthermore, it is set to port-forward 3306 in case you need direct network access to the MySQL service. If this sort of access is not needed, it should be disabled in production setups by changing the 'port' declaration to 'expose'.
 
-**freeradius 3**
+**freeradius 3.0.17**
 
-The FreeRADIUS 3 server is the service around which the rest of the services in this app are built. You will need some knowledge about configuring it in order to make it work according to your requirements. The configuration files are located in the folder *./freeradius/src*. As is, these files are ready to be deployed and will instantiate one virtual server called **server01** listening on the default auth and acct ports 1812 and 1813. Depending on your use case, you may wish to edit the *Simultaneous-Use* section of the [queries.conf](./freeradius/src/mods-config/sql/main/mysql/queries.conf) file.
+The FreeRADIUS 3 server is the service around which the rest of the services in this app are built. You will need some knowledge about configuring it in order to make it work according to your requirements. The configuration files are located in the folder *./freeradius/config/freeradius*. This folder is volume-mapped to  As is, these files are ready to be deployed and will instantiate one virtual server called **server01** listening on the default auth and acct ports 1812 and 1813. Depending on your use case, you may wish to edit the *Simultaneous-Use* section of the [queries.conf](./freeradius/src/mods-config/sql/main/mysql/queries.conf) file.
 
 **laravel**
 
-For a production setup, modify the **.env** file located in *./web/src* and make sure **you change the app key**. You can do so by going to a terminal, navigating to the *./web/src* directory, and running ```php artisan key:generate```.
+For a production setup, modify the **.env** file located in *./web/src* and make sure **you change the app key** by going to a terminal, navigating to the *./web/src* directory, and running ```php artisan key:generate```.
 
 
 

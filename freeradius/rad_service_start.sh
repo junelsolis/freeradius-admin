@@ -1,4 +1,4 @@
 #!/bin/bash
 
-service freeradius start
+service radiusd start
 tail -f /var/log/lastlog

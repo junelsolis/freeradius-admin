@@ -1,0 +1,126 @@
+Sun Oct 14 12:05:09 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:05:09 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:05:09 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Failed to find 'Auth-Type EAP' section.  Cannot authenticate users.
+Sun Oct 14 12:05:09 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Instantiation failed for module "eap"
+Sun Oct 14 12:05:12 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:05:12 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:05:12 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Failed to find 'Auth-Type EAP' section.  Cannot authenticate users.
+Sun Oct 14 12:05:12 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Instantiation failed for module "eap"
+Sun Oct 14 12:05:14 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:05:14 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:05:14 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Failed to find 'Auth-Type EAP' section.  Cannot authenticate users.
+Sun Oct 14 12:05:14 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Instantiation failed for module "eap"
+Sun Oct 14 12:05:16 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:05:16 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:05:16 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Failed to find 'Auth-Type EAP' section.  Cannot authenticate users.
+Sun Oct 14 12:05:16 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Instantiation failed for module "eap"
+Sun Oct 14 12:05:18 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:05:18 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:05:18 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Failed to find 'Auth-Type EAP' section.  Cannot authenticate users.
+Sun Oct 14 12:05:18 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Instantiation failed for module "eap"
+Sun Oct 14 12:05:20 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:05:20 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:05:20 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Failed to find 'Auth-Type EAP' section.  Cannot authenticate users.
+Sun Oct 14 12:05:20 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Instantiation failed for module "eap"
+Sun Oct 14 12:05:24 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:05:24 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:05:24 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Failed to find 'Auth-Type EAP' section.  Cannot authenticate users.
+Sun Oct 14 12:05:24 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Instantiation failed for module "eap"
+Sun Oct 14 12:05:32 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:05:32 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:05:32 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Failed to find 'Auth-Type EAP' section.  Cannot authenticate users.
+Sun Oct 14 12:05:32 2018 : Error: /etc/freeradius/mods-enabled/eap[14]: Instantiation failed for module "eap"
+Sun Oct 14 12:06:20 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:06:20 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:06:20 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:06:20 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay-USec" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:06:20 2018 : Info: rlm_sql_mysql: libmysql version: 5.7.21
+Sun Oct 14 12:06:20 2018 : Info: rlm_sql (sql): Attempting to connect to database "radius"
+Sun Oct 14 12:06:20 2018 : Info: rlm_sql (sql): Opening additional connection (0), 1 of 32 pending slots used
+Sun Oct 14 12:06:20 2018 : Error: rlm_sql_mysql: Couldn't connect to MySQL server root@fradmin-mysql:radius
+Sun Oct 14 12:06:20 2018 : Error: rlm_sql_mysql: MySQL error: Can't connect to MySQL server on 'fradmin-mysql' (111)
+Sun Oct 14 12:06:20 2018 : Error: rlm_sql (sql): Opening connection failed (0)
+Sun Oct 14 12:06:20 2018 : Error: /etc/freeradius/mods-enabled/sql[20]: Instantiation failed for module "sql"
+Sun Oct 14 12:06:23 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:06:23 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:06:23 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:06:23 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay-USec" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:06:23 2018 : Info: rlm_sql_mysql: libmysql version: 5.7.21
+Sun Oct 14 12:06:23 2018 : Info: rlm_sql (sql): Attempting to connect to database "radius"
+Sun Oct 14 12:06:23 2018 : Info: rlm_sql (sql): Opening additional connection (0), 1 of 32 pending slots used
+Sun Oct 14 12:06:23 2018 : Info: rlm_sql (sql): Opening additional connection (1), 1 of 31 pending slots used
+Sun Oct 14 12:06:23 2018 : Info: rlm_sql (sql): Opening additional connection (2), 1 of 30 pending slots used
+Sun Oct 14 12:06:23 2018 : Info: rlm_sql (sql): Opening additional connection (3), 1 of 29 pending slots used
+Sun Oct 14 12:06:23 2018 : Info: rlm_sql (sql): Opening additional connection (4), 1 of 28 pending slots used
+Sun Oct 14 12:06:23 2018 : Info: Loaded virtual server <default>
+Sun Oct 14 12:06:23 2018 : Info: Loaded virtual server server01
+Sun Oct 14 12:06:23 2018 : Info: Ready to process requests
+Sun Oct 14 12:07:20 2018 : Error: Ignoring request to auth address * port 1812 bound to server server01 from unknown client 172.23.0.7 port 56034 proto udp
+Sun Oct 14 12:07:25 2018 : Error: Ignoring request to auth address * port 1812 bound to server server01 from unknown client 172.23.0.7 port 56034 proto udp
+Sun Oct 14 12:07:30 2018 : Error: Ignoring request to auth address * port 1812 bound to server server01 from unknown client 172.23.0.7 port 56034 proto udp
+Sun Oct 14 12:10:07 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:10:07 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:10:07 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:10:07 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay-USec" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:10:07 2018 : Info: rlm_sql_mysql: libmysql version: 5.7.21
+Sun Oct 14 12:10:07 2018 : Info: rlm_sql (sql): Attempting to connect to database "radius"
+Sun Oct 14 12:10:07 2018 : Info: rlm_sql (sql): Opening additional connection (0), 1 of 32 pending slots used
+Sun Oct 14 12:10:07 2018 : Error: rlm_sql_mysql: Couldn't connect to MySQL server root@fradmin-mysql:radius
+Sun Oct 14 12:10:07 2018 : Error: rlm_sql_mysql: MySQL error: Can't connect to MySQL server on 'fradmin-mysql' (111)
+Sun Oct 14 12:10:07 2018 : Error: rlm_sql (sql): Opening connection failed (0)
+Sun Oct 14 12:10:07 2018 : Error: /etc/freeradius/mods-enabled/sql[20]: Instantiation failed for module "sql"
+Sun Oct 14 12:10:10 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:10:10 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:10:10 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:10:10 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay-USec" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:10:10 2018 : Info: rlm_sql_mysql: libmysql version: 5.7.21
+Sun Oct 14 12:10:10 2018 : Info: rlm_sql (sql): Attempting to connect to database "radius"
+Sun Oct 14 12:10:10 2018 : Info: rlm_sql (sql): Opening additional connection (0), 1 of 32 pending slots used
+Sun Oct 14 12:10:10 2018 : Info: rlm_sql (sql): Opening additional connection (1), 1 of 31 pending slots used
+Sun Oct 14 12:10:10 2018 : Info: rlm_sql (sql): Opening additional connection (2), 1 of 30 pending slots used
+Sun Oct 14 12:10:10 2018 : Info: rlm_sql (sql): Opening additional connection (3), 1 of 29 pending slots used
+Sun Oct 14 12:10:10 2018 : Info: rlm_sql (sql): Opening additional connection (4), 1 of 28 pending slots used
+Sun Oct 14 12:10:10 2018 : Info: Loaded virtual server <default>
+Sun Oct 14 12:10:10 2018 : Info: Loaded virtual server server01
+Sun Oct 14 12:10:10 2018 : Info: Ready to process requests
+Sun Oct 14 12:10:12 2018 : Info: Need 5 more connections to reach 10 spares
+Sun Oct 14 12:10:12 2018 : Info: rlm_sql (sql): Opening additional connection (5), 1 of 27 pending slots used
+Sun Oct 14 12:11:10 2018 : Info: Need 4 more connections to reach 10 spares
+Sun Oct 14 12:11:10 2018 : Info: rlm_sql (sql): Opening additional connection (6), 1 of 26 pending slots used
+Sun Oct 14 12:12:00 2018 : Info: rlm_sql (sql): Closing connection (2): Hit idle_timeout, was idle for 110 seconds
+Sun Oct 14 12:12:00 2018 : Info: rlm_sql (sql): Closing connection (3): Hit idle_timeout, was idle for 110 seconds
+Sun Oct 14 12:12:00 2018 : Info: rlm_sql (sql): Closing connection (4): Hit idle_timeout, was idle for 110 seconds
+Sun Oct 14 12:12:00 2018 : Info: rlm_sql (sql): Closing connection (0): Hit idle_timeout, was idle for 108 seconds
+Sun Oct 14 12:12:00 2018 : Info: rlm_sql (sql): Closing connection (5): Hit idle_timeout, was idle for 108 seconds
+Sun Oct 14 12:12:00 2018 : Info: Need 1 more connections to reach min connections (3)
+Sun Oct 14 12:12:00 2018 : Info: rlm_sql (sql): Opening additional connection (7), 1 of 30 pending slots used
+Sun Oct 14 12:12:26 2018 : Info: Signalled to terminate
+Sun Oct 14 12:12:26 2018 : Info: Exiting normally
+Sun Oct 14 12:12:26 2018 : Info: rlm_sql (sql): Closing connection (7)
+Sun Oct 14 12:12:26 2018 : Info: rlm_sql (sql): Closing connection (6)
+Sun Oct 14 12:12:26 2018 : Info: rlm_sql (sql): Closing connection (1)
+Sun Oct 14 12:12:37 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:12:37 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:12:37 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:12:37 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay-USec" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:12:37 2018 : Info: rlm_sql_mysql: libmysql version: 5.7.21
+Sun Oct 14 12:12:37 2018 : Info: rlm_sql (sql): Attempting to connect to database "radius"
+Sun Oct 14 12:12:37 2018 : Info: rlm_sql (sql): Opening additional connection (0), 1 of 32 pending slots used
+Sun Oct 14 12:12:37 2018 : Error: rlm_sql_mysql: Couldn't connect to MySQL server root@fradmin-mysql:radius
+Sun Oct 14 12:12:37 2018 : Error: rlm_sql_mysql: MySQL error: Can't connect to MySQL server on 'fradmin-mysql' (111)
+Sun Oct 14 12:12:37 2018 : Error: rlm_sql (sql): Opening connection failed (0)
+Sun Oct 14 12:12:37 2018 : Error: /etc/freeradius/mods-enabled/sql[20]: Instantiation failed for module "sql"
+Sun Oct 14 12:12:39 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Sun Oct 14 12:12:39 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Sun Oct 14 12:12:39 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:12:39 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay-USec" 	found in filter list for realm "DEFAULT". 
+Sun Oct 14 12:12:39 2018 : Info: rlm_sql_mysql: libmysql version: 5.7.21
+Sun Oct 14 12:12:39 2018 : Info: rlm_sql (sql): Attempting to connect to database "radius"
+Sun Oct 14 12:12:39 2018 : Info: rlm_sql (sql): Opening additional connection (0), 1 of 32 pending slots used
+Sun Oct 14 12:12:39 2018 : Info: rlm_sql (sql): Opening additional connection (1), 1 of 31 pending slots used
+Sun Oct 14 12:12:39 2018 : Info: rlm_sql (sql): Opening additional connection (2), 1 of 30 pending slots used
+Sun Oct 14 12:12:39 2018 : Info: rlm_sql (sql): Opening additional connection (3), 1 of 29 pending slots used
+Sun Oct 14 12:12:39 2018 : Info: rlm_sql (sql): Opening additional connection (4), 1 of 28 pending slots used
+Sun Oct 14 12:12:39 2018 : Info: Loaded virtual server <default>
+Sun Oct 14 12:12:39 2018 : Info: Loaded virtual server server01
+Sun Oct 14 12:12:39 2018 : Info: Ready to process requests

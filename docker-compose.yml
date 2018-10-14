@@ -49,7 +49,7 @@ services:
       - "9200:80"
 
   radius:
-    image: freeradius/freeradius-server:3.0.17-alpine
+    image: freeradius/freeradius-server:3.0.17
     container_name: fradmin-radius
     depends_on:
       - mysql
@@ -57,12 +57,16 @@ services:
      - "1812:1812"
      - "1813:1813"
     volumes:
-     - "./config/raddb:/opt/etc/raddb"
+    - "./freeradius/config/freeradius:/etc/freeradius"
+    - "./freeradius/logs:/var/log/freeradius"
+
     restart: always
-    #entrypoint: /rad_service_start.sh
+    #tty: true
 
   radtest:
     build: ./radtest
+    container_name: fradmin-radtest
     depends_on:
       - radius
     restart: always
+    tty: true
