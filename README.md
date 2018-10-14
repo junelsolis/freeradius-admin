@@ -6,7 +6,7 @@ A web interface for FreeRADIUS with a MySQL backend.
 # Try the Demo Site
 [https://fradmin-demo.junelsolis.com](https://fradmin-demo.junelsolis.com)
 
-Login credentials: **testadmin**, **password**
+Login credentials: **admin**, **password**
 
 # Install with Docker for Testing
 The simplest way to install this app is using Docker.
