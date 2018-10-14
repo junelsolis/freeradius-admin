@@ -1,34 +1,60 @@
-
-#title1 {
-  color: rgb(0,77,149);
-  font-family: 'Exo', sans-serif;
-  font-weight: 900;
-  font-style: italic;
-}
-
-#title2 {
-  color: rgb(120,120,120);
-  font-family: 'Exo', sans-serif;
-  font-weight: 300;
-  font-style: normal;
+body {
+  height: 100vh;
+  background: url('/images/login-background.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 
-
-#login-button {
-  color: rgb(0,77,149);
-  border-color: rgb(0,77,149);
-  background-color: white;
-}
-
-#login-button:hover {
-  color: white;
-  border-color: rgb(0,77,149);
-  background-color: rgb(0,77,149);
-}
-
-#footer p {
-  font-size: 0.7em;
-  color: rgb(150,150,150);
+#main {
+  max-width: 300px;
+  min-height: 500px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: auto;
   text-align: center;
+}
+
+#main .form {
+  padding-top: 40px;
+}
+
+#main label {
+  font-family: 'Montserrat', sans-serif;
+  color: #444444;
+  /* text-transform: uppercase; */
+}
+
+#main .button {
+  margin-top: 30px;
+  border-color: #094F93;
+  background-color: white;
+  color: #094F93;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#main .button:hover {
+  background-color: #094F93;
+  color: white;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8em;
+  color: #818F9B;
+}
+
+#footer a {
+  color: #818F9B;
+}
+
+#footer a:hover {
+  color: #094f93;
 }
