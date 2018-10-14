@@ -1,4 +1,4 @@
-![FreeRADIUS Admin](banner.png)
+<img src='https://github.com/junelsolis/freeradius-admin/blob/master/banner@2x.png' width="500">
 
 A web interface for FreeRADIUS with a MySQL backend.
 
