@@ -19,15 +19,15 @@
           <h1>Statistics</h1>
         </div>
         <div class='stat cell small-3'>
-          <h2 class='number'>135</h2>
+          <h2 class='number'>{{ $totalUsers }}</h2>
           <h2 class='title'>Users</h2>
         </div>
         <div class='stat cell small-3'>
-          <h2 class='number'>23</h2>
+          <h2 class='number'>{{ $totalGroups }}</h2>
           <h2 class='title'>Groups</h2>
         </div>
         <div class='stat cell small-3'>
-          <h2 class='number'>17</h2>
+          <h2 class='number'>{{ $totalNas }}</h2>
           <h2 class='title'>NAS</h2>
         </div>
       </div>

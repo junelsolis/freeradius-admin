@@ -209,8 +209,15 @@ class AdminController extends Controller
         session()->flush();
         return redirect('/');
       }
-      
-      return view('dashboard');
+
+      $totalUsers = $this->countUsers();
+      $totalGroups = $this->countGroups();
+      $totalNas = $this->countNas();
+
+      return view('dashboard')
+        ->with('totalUsers' , $totalUsers)
+        ->with('totalGroups', $totalGroups)
+        ->with('totalNas', $totalNas);
     }
 
     public function userChangePassword(Request $request) {
@@ -828,5 +835,23 @@ class AdminController extends Controller
       }
 
       return $collection;
+    }
+
+    private function countUsers() {
+      $count = DB::table('users')->count();
+
+      return $count;
+    }
+
+    private function countGroups() {
+      $count = DB::table('groups')->count();
+
+      return $count;
+    }
+
+    private function countNas() {
+      $count = DB::table('nas')->count();
+
+      return $count;
     }
 }
