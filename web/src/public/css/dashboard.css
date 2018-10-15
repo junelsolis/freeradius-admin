@@ -1,52 +1,48 @@
-#title1 {
-  color: rgb(0,77,149);
-  font-family: 'Exo', sans-serif;
-  font-weight: 900;
-  font-style: italic;
+#main {
+  padding: 100px;
 }
 
-#title2 {
-  color: rgb(120,120,120);
-  font-family: 'Exo', sans-serif;
-  font-weight: 300;
-  font-style: normal;
+#main h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8em;
+  font-weight: 500;
+  color: #0167CB;
 }
 
-#right-sidebar a {
-  color: rgb(102,102,102);
+#main #stats {
+  padding-bottom: 50px;
+}
+#main #stats .stat {
+  /* text-align: center; */
+  font-family: 'Montserrat', sans-serif;
 }
 
-
-#content h2 {
-  color: rgb(0,77,149);
+#main #stats .stat .number {
+  color: #094F93;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3em;
+  font-weight: 500;
+}
+#main #stats .stat .title {
+  color: #818F9B;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75em;
+  font-weight: 500;
+  line-height: 0;
 }
 
-.uk-form-label {
-  color: rgb(102,102,102);
+#main .section {
+  width: 60%;
+  padding-top: 50px;
+  font-family: 'Montserrat', sans-serif;
 }
 
-#content .uk-button-primary {
-  border-color: rgb(0,77,149);
-  background-color: white;
-  color: rgb(0,77,149);
+#main .section h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #444444;
 }
 
-#content .uk-button-primary:hover {
-  background-color: rgb(0,77,149);
-  color: white;
-}
-
-#content .uk-button-danger {
-  border-color: rgb(240,80,110);
-  background-color: white;
-  color: rgb(240,80,110);
-}
-
-#content .uk-button-danger:hover {
-  background-color: rgb(240,80,110);
-  color: white;
-}
-
-td a {
-  color: rgb(102,102,102);
+#main .section p {
+  color: #707070;
 }

@@ -1,0 +1,36 @@
+#right-sidebar {
+  padding-top: 25px;
+  padding-right: 25px;
+  padding-left: 25px;
+  background-color: #f2f2f2;
+}
+
+#right-sidebar p {
+  text-align: right;
+  font-family: 'Montserrat',sans-serif;
+}
+
+#right-sidebar #user {
+  color: #818F9B;
+  font-weight: 500;
+  font-size: 0.9em;
+  line-height: 0.5;
+  padding-top: 15px;
+}
+
+#right-sidebar #user span {
+  color: #444444;
+}
+
+#right-sidebar #menu {
+  font-size: 0.75em;
+  line-height: 0;
+}
+
+#right-sidebar #menu a {
+  color: #818f9b;
+}
+
+#right-sidebar #menu a:hover {
+  color: #094F93;
+}

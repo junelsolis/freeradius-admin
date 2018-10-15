@@ -204,6 +204,12 @@ class AdminController extends Controller
     }
 
     public function showDashboard() {
+      $check = $this->checkLoggedIn();
+      if ($check == false) {
+        session()->flush();
+        return redirect('/');
+      }
+      
       return view('dashboard');
     }
 

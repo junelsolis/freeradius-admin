@@ -1,10 +1,9 @@
 #left-sidebar {
-  background-color: #F2F2F2;
+  background-color: #1a1a1a;
   min-height: 100vh;
   padding-left: 30px;
   padding-top: 100px;
 
-  position: fixed;
 }
 
 #left-sidebar > div {
@@ -17,6 +16,6 @@
 
 #left-sidebar li a {
   font-family: 'Montserrat', sans-serif;
-  color: #444444;
+  color: #818F9B;
   font-size: 0.85em;
 }

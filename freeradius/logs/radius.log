@@ -124,3 +124,17 @@ Sun Oct 14 12:12:39 2018 : Info: rlm_sql (sql): Opening additional connection (4
 Sun Oct 14 12:12:39 2018 : Info: Loaded virtual server <default>
 Sun Oct 14 12:12:39 2018 : Info: Loaded virtual server server01
 Sun Oct 14 12:12:39 2018 : Info: Ready to process requests
+Mon Oct 15 06:12:58 2018 : Info: Debug state unknown (cap_sys_ptrace capability not set)
+Mon Oct 15 06:12:58 2018 : Info: rlm_sql (sql): Driver rlm_sql_mysql (module rlm_sql_mysql) loaded and linked
+Mon Oct 15 06:12:58 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay" 	found in filter list for realm "DEFAULT". 
+Mon Oct 15 06:12:58 2018 : Warning: [/etc/freeradius/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay-USec" 	found in filter list for realm "DEFAULT". 
+Mon Oct 15 06:12:58 2018 : Info: rlm_sql_mysql: libmysql version: 5.7.21
+Mon Oct 15 06:12:58 2018 : Info: rlm_sql (sql): Attempting to connect to database "radius"
+Mon Oct 15 06:12:58 2018 : Info: rlm_sql (sql): Opening additional connection (0), 1 of 32 pending slots used
+Mon Oct 15 06:12:59 2018 : Info: rlm_sql (sql): Opening additional connection (1), 1 of 31 pending slots used
+Mon Oct 15 06:12:59 2018 : Info: rlm_sql (sql): Opening additional connection (2), 1 of 30 pending slots used
+Mon Oct 15 06:12:59 2018 : Info: rlm_sql (sql): Opening additional connection (3), 1 of 29 pending slots used
+Mon Oct 15 06:12:59 2018 : Info: rlm_sql (sql): Opening additional connection (4), 1 of 28 pending slots used
+Mon Oct 15 06:12:59 2018 : Info: Loaded virtual server <default>
+Mon Oct 15 06:12:59 2018 : Info: Loaded virtual server server01
+Mon Oct 15 06:12:59 2018 : Info: Ready to process requests
