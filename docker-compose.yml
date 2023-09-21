@@ -34,7 +34,6 @@ services:
     restart: always
     volumes:
       - "./web/src:/var/www/html"
-    restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
