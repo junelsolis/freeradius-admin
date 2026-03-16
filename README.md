@@ -14,7 +14,7 @@ The simplest way to install this app is using Docker.
 1. Clone the master branch of this repository
 1. Run ```cd freeradius-admin```
 2. Run ```docker-compose build```
-3. Run ```docker container exec fradmin-web chown -R www-data:www-data /var/www/html```
+3. Run ```docker container exec fradmin-nginx chown -R www-data:www-data /var/www/html```
 3. Run ```docker compose up```
 3. Using your browser go to [http://localhost:80](http://localhost:80). The login credentials are **admin** and **password**.
 4. *phpmyadmin* is included as a service for testing and evaluation. It is accessible at [http://localhost:9200](http://localhost:9200).
